@@ -1,4 +1,4 @@
-var Arcini = (function(){ // @todo Rename Arcini -> Arcini
+var Arcini = (function() {
 	var isValueValid = function(value) {
 		return (value != undefined && value != null);
 	};
@@ -10,7 +10,7 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 	return {
 		isValueValid: isValueValid,
 		isNumeric: isNumeric,
-		Model: (function(){
+		Model: (function() {
 			return {
 				// Item: function(itemName, description, bonuses, damage, range, physicalResistance, elementalResistance, speedBonus) {
 					// /*
@@ -78,7 +78,7 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 									}
 								};
 							}()),
-							spent: (function(){
+							spent: (function() {
 								return {
 									blood: 0,
 									air: 0,
@@ -117,7 +117,7 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 						};
 					}());
 
-					var resistances = (function(){
+					var resistances = (function() {
 						return {
 							physical: function() {
 								return Math.floor(attributes.blood()/5 + attributes.total()/20);
@@ -137,7 +137,7 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 						};
 					}());
 
-					var offence = (function(){
+					var offence = (function() {
 						return {
 							physical: function () {
 								return  Math.floor(0.55 + (attributes.blood()/2 + attributes.earth() + attributes.fire())/5 + attributes.total()/20);
@@ -148,7 +148,7 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 						};
 					}());
 
-					var defence = (function(){
+					var defence = (function() {
 						return {
 							physical: function() {
 								return Math.floor((attributes.blood()/2 + attributes.earth() + attributes.water())/5 + attributes.total()/20);
@@ -175,7 +175,7 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 						return Math.floor(4 + attributes.air()/5);
 					};
 					
-					var extra = (function(){
+					var extra = (function() {
 						return {
 							damage: function() {
 								return Math.floor(attributes.fire()/5 + attributes.total()/10);
@@ -202,31 +202,11 @@ var Arcini = (function(){ // @todo Rename Arcini -> Arcini
 	};
 }());
 
-// For testing only
-var app = angular.module('testapp', []);
-app.controller('testctl', function($scope) {
-	$scope.characters = [
-		new Arcini.Model.Character('Jonathan', [ 3, 0, 6, 1, 0 ]),
-		new Arcini.Model.Character('Cartha', [ 3, 0, 1, 0, 6 ]),
-		new Arcini.Model.Character('Kiara', [ 4, 6, 0, 0, 0 ]),
-		new Arcini.Model.Character('Goblin God', [ 11, 0, 7, 7, 0 ]),
-
-	];
-	
-	$scope.deleteCharacter = function(idx) {
-		$scope.characters.splice(idx, 1);
-	};
-	
-	$scope.addCharacter = function() {
-		$scope.characters.push(new Arcini.Model.Character());
-	};
-});
-
-app.directive('integer', function(){
+app.directive('integer', function() {
     return {
         require: 'ngModel',
-        link: function(scope, ele, attr, ctrl){
-            ctrl.$parsers.unshift(function(viewValue){
+        link: function(scope, ele, attr, ctrl) {
+            ctrl.$parsers.unshift(function(viewValue) {
             	if (viewValue == undefined || viewValue == null) {
             		return 0;
             	}
