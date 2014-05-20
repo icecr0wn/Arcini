@@ -1,0 +1,58 @@
+a {
+	cursor: pointer;
+	font-weight: bold;
+	color: darkgreen;
+}
+a:hover, a:focus {
+	font-weight:normal;
+	text-decoration: underline overline;
+}
+a.remove:hover, a.remove:focus {
+	color: red;
+}
+
+body {
+	background-color: #FFFFDD;
+}
+
+input[type="text"] {
+	color: #61210B;
+	background-color: #F5F6CE;
+	display: block;
+	border: solid 1px #868A08;
+	width: 70px
+}
+input[type="text"].number {
+	text-align: right;
+}
+input[type="text"].span {
+	width: 100%;
+}
+input[type="text"]:focus {
+	background-color: #E1F5A9;
+	border: solid 1px #4B610B;
+}
+
+table {
+	border-collapse: collapse;
+	margin-right: 15px;
+}
+
+tr {
+	border: 0px;
+}
+
+td.value {
+	background-color: lightgreen;
+	border: solid 1px #21610B;
+	text-align: right;
+}
+td.title {
+	font-weight: bold;
+}
+td.sub {
+	font-style: italic;
+}
+td.remove {
+	text-align: center;
+}
