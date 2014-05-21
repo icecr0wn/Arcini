@@ -10,6 +10,14 @@ var Arcini = (function() {
 	return {
 		isValueValid: isValueValid,
 		isNumeric: isNumeric,
+		Constants: (function(){
+			return {
+				maxAttribute: 30,
+				minAttribute: 0,
+				minBloodAttribute: 3,
+				minSpentAttribute: 0
+			};
+		}()),
 		Model: (function() {
 			return {
 				// Item: function(itemName, description, bonuses, damage, range, physicalResistance, elementalResistance, speedBonus) {
@@ -55,7 +63,6 @@ var Arcini = (function() {
 						baseAttributes:[ blood, air, earth, fire, water ]
 					*/
 					var name = (Arcini.isValueValid(characterName) ? characterName : '');
-					var damageTaken = 5;
 					
 					if (!Arcini.isValueValid(baseAttributes)) {
 						baseAttributes = [];
@@ -65,16 +72,34 @@ var Arcini = (function() {
 						return {
 							base: (function() {
 								return {
-									blood: Math.floor(Arcini.isNumeric(baseAttributes[0]) ? baseAttributes[0] : 3),
-									air: Math.floor(Arcini.isNumeric(baseAttributes[1]) ? baseAttributes[1] : 0),
-									earth: Math.floor(Arcini.isNumeric(baseAttributes[2]) ? baseAttributes[2] : 0),
-									fire: Math.floor(Arcini.isNumeric(baseAttributes[3]) ? baseAttributes[3] : 0),
-									water: Math.floor(Arcini.isNumeric(baseAttributes[4]) ? baseAttributes[4] : 0),
+									blood: Math.floor(Arcini.isNumeric(baseAttributes[0]) ? baseAttributes[0] : Arcini.Constants.minBloodAttribute),
+									air: Math.floor(Arcini.isNumeric(baseAttributes[1]) ? baseAttributes[1] : Arcini.Constants.minAttribute),
+									earth: Math.floor(Arcini.isNumeric(baseAttributes[2]) ? baseAttributes[2] : Arcini.Constants.minAttribute),
+									fire: Math.floor(Arcini.isNumeric(baseAttributes[3]) ? baseAttributes[3] : Arcini.Constants.minAttribute),
+									water: Math.floor(Arcini.isNumeric(baseAttributes[4]) ? baseAttributes[4] : Arcini.Constants.minAttribute),
 									elementTotal: function() {
 										return this.air + this.earth + this.fire + this.water;
 									},
 									total: function() {
 										return this.blood + this.elementTotal();
+									},
+									add: function(attribute) {
+										switch (attribute) {
+											case 0: this.blood = Math.min(Arcini.Constants.maxAttribute, this.blood + 1); break;
+											case 1: this.air = Math.min(Arcini.Constants.maxAttribute, this.air + 1); break;
+											case 2: this.earth = Math.min(Arcini.Constants.maxAttribute, this.earth + 1); break;
+											case 3: this.fire = Math.min(Arcini.Constants.maxAttribute, this.fire + 1); break;
+											case 4: this.water = Math.min(Arcini.Constants.maxAttribute, this.water + 1); break;
+										};
+									},
+									remove: function(attribute) {
+										switch (attribute) {
+											case 0: this.blood = Math.max(Arcini.Constants.minBloodAttribute, this.blood - 1); break;
+											case 1: this.air = Math.max(Arcini.Constants.minAttribute, this.air - 1); break;
+											case 2: this.earth = Math.max(Arcini.Constants.minAttribute, this.earth - 1); break;
+											case 3: this.fire = Math.max(Arcini.Constants.minAttribute, this.fire - 1); break;
+											case 4: this.water = Math.max(Arcini.Constants.minAttribute, this.water - 1); break;
+										};
 									}
 								};
 							}()),
@@ -90,6 +115,24 @@ var Arcini = (function() {
 									},
 									total: function() {
 										return this.blood + this.elementTotal();
+									},
+									add: function(attribute) {
+										switch (attribute) {
+											case 0: this.blood = Math.min(attributes.base.blood, this.blood + 1); break;
+											case 1: this.air = Math.min(attributes.base.air, this.air + 1); break;
+											case 2: this.earth = Math.min(attributes.base.earth, this.earth + 1); break;
+											case 3: this.fire = Math.min(attributes.base.fire, this.fire + 1); break;
+											case 4: this.water = Math.min(attributes.base.water, this.water + 1); break;
+										};
+									},
+									remove: function(attribute) {
+										switch (attribute) {
+											case 0: this.blood = Math.max(Arcini.Constants.minSpentAttribute, this.blood - 1); break;
+											case 1: this.air = Math.max(Arcini.Constants.minSpentAttribute, this.air - 1); break;
+											case 2: this.earth = Math.max(Arcini.Constants.minSpentAttribute, this.earth - 1); break;
+											case 3: this.fire = Math.max(Arcini.Constants.minSpentAttribute, this.fire - 1); break;
+											case 4: this.water = Math.max(Arcini.Constants.minSpentAttribute, this.water - 1); break;
+										};
 									}
 								};
 							}()),
@@ -167,6 +210,12 @@ var Arcini = (function() {
 							},
 							current: function() {
 								return this.max() - this.damage;
+							},
+							dealDamage: function() {
+								this.damage = Math.min(this.max(), this.damage + 1);
+							},
+							heal: function() {
+								this.damage = Math.max(0, this.damage - 1);
 							}
 						};
 					}());
@@ -201,17 +250,3 @@ var Arcini = (function() {
 		}())
 	};
 }());
-
-app.directive('integer', function() {
-    return {
-        require: 'ngModel',
-        link: function(scope, ele, attr, ctrl) {
-            ctrl.$parsers.unshift(function(viewValue) {
-            	if (viewValue == undefined || viewValue == null) {
-            		return 0;
-            	}
-                return parseInt(viewValue);
-            });
-        }
-    };
-});

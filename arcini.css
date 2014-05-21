@@ -1,14 +1,20 @@
 a {
 	cursor: pointer;
-	font-weight: bold;
+	font-weight: normal;
 	color: darkgreen;
 }
-a:hover, a:focus {
-	font-weight:normal;
-	text-decoration: underline overline;
+a:hover {
+	font-weight: bold;
+
 }
-a.remove:hover, a.remove:focus {
+a.remove{
 	color: red;
+}
+a.attribadd:hover {
+	text-decoration: normal;
+}
+a.attribremove {
+	color: red
 }
 
 body {
@@ -20,7 +26,6 @@ input[type="text"] {
 	background-color: #F5F6CE;
 	display: block;
 	border: solid 1px #868A08;
-	width: 70px
 }
 input[type="text"].number {
 	text-align: right;
@@ -42,6 +47,11 @@ tr {
 	border: 0px;
 }
 
+td.input {
+	background-color: #F5F6CE;
+	border: solid 1px #868A08;
+	text-align: right;	
+}
 td.value {
 	background-color: lightgreen;
 	border: solid 1px #21610B;

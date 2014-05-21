@@ -20,44 +20,89 @@
 						<table>
 							<tr>
 								<td class='remove'><a class='remove' ng-click='deleteCharacter($index)' >X</a></td>
-								<td colspan=2><b><input class='span' type='text' ng-model='character.name' /></b></td>
+								<td colspan=4><b><input class='span' type='text' ng-model='character.name' /></b></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td class='sub'>Attrib</td>
+								<td></td>
 								<td class='sub'>Spent</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Blood</td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.base.blood' integer /></td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.spent.blood' integer /></td>
-							</tr>
+								<td class='input'>{{character.attributes.base.blood}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.base.remove(0)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.base.add(0)'>+</a>
+								</td>
+								<td class='input'>{{character.attributes.spent.blood}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.spent.remove(0)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.spent.add(0)'>+</a>
+								</td>
 							<tr>
 								<td>Air</td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.base.air' integer /></td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.spent.air' integer /></td>
+								<td class='input'>{{character.attributes.base.air}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.base.remove(1)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.base.add(1)'>+</a>
+								</td>
+								<td class='input'>{{character.attributes.spent.air}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.spent.remove(1)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.spent.add(1)'>+</a>
+								</td>
 							</tr>
 							<tr>
 								<td>Earth</td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.base.earth' integer /></td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.spent.earth' integer /></td>
+								<td class='input'>{{character.attributes.base.earth}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.base.remove(2)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.base.add(2)'>+</a>
+								</td>
+								<td class='input'>{{character.attributes.spent.earth}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.spent.remove(2)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.spent.add(2)'>+</a>
+								</td>
 							</tr>
 							<tr>
 								<td>Fire</td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.base.fire' integer /></td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.spent.fire' integer /></td>
+								<td class='input'>{{character.attributes.base.fire}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.base.remove(3)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.base.add(3)'>+</a>
+								</td>
+								<td class='input'>{{character.attributes.spent.fire}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.spent.remove(3)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.spent.add(3)'>+</a>
+								</td>
 							</tr>
 							<tr>
 								<td>Water</td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.base.water' integer /></td>
-								<td class='input'><input class='number' type='text' ng-model='character.attributes.spent.water' integer /></td>
+								<td class='input'>{{character.attributes.base.water}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.base.remove(4)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.base.add(4)'>+</a>
+								</td>
+								<td class='input'>{{character.attributes.spent.water}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.attributes.spent.remove(4)'>-</a>
+									<a class='attribadd' ng-click='character.attributes.spent.add(4)'>+</a>
+								</td>
 							</tr>
 							<tr>
 								<td><br></td>
 							</tr>
 							<tr>
 								<td>Damage</td>
-								<td><input class='number' type='text' ng-model='character.health.damage' integer /></td>
+								<td class='input'>{{character.health.damage}}</td>
+								<td>
+									<a class='attribremove' ng-click='character.health.heal()'>-</a>
+									<a class='attribadd' ng-click='character.health.dealDamage()'>+</a>
+								</td>
 							</tr>
 						</table>
 						<br/>
