@@ -12,10 +12,18 @@ var Arcini = (function() {
 		isNumeric: isNumeric,
 		Constants: (function(){
 			return {
-				maxAttribute: 30,
-				minAttribute: 0,
-				minBloodAttribute: 3,
-				minSpentAttribute: 0
+				maxAttribute: function() {
+					return 30;
+				},
+				minAttribute: function() {
+					return 0;
+				},
+				minBloodAttribute: function() {
+					return 3;
+				},
+				minSpentAttribute: function() {
+					return 0;
+				}
 			};
 		}()),
 		Model: (function() {
