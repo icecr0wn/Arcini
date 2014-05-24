@@ -28,43 +28,6 @@ var Arcini = (function() {
 		}()),
 		Model: (function() {
 			return {
-				// Item: function(itemName, description, bonuses, damage, range, physicalResistance, elementalResistance, speedBonus) {
-					// /*
-						// itemName:string
-						// description:string
-						// bonuses: [ blood, air, earth, fire, water ]
-						// damage:string
-						// range:string
-						// physicalResistance:int
-						// elementalResistance:int
-						// speedBonus:int
-					// */
-					// var name = (Arcini.isValueValid(itemName) ? itemName : '');
-					
-					// var bonus = (function() {
-						// return {
-							// blood: Math.floor(Arcini.isNumeric(bonuses[0]) ? bonuses[0] : 3),
-							// air: Math.floor(Arcini.isNumeric(bonuses[1]) ? bonuses[1] : 0),
-							// earth: Math.floor(Arcini.isNumeric(bonuses[2]) ? bonuses[2] : 0),
-							// fire: Math.floor(Arcini.isNumeric(bonuses[3]) ? bonuses[3] : 0),
-							// water: Math.floor(Arcini.isNumeric(bonuses[4]) ? bonuses[4] : 0),
-							// speed: Math.floor(Arcini.isNumeric(speedBonus)) ? speedBonus : 0
-						// };
-					// }());
-					
-					// var resistance = (function() {
-						// return {
-							// physical: Math.floor(Arcini.isNumeric(physicalResistance) ? physicalResistance : 0),
-							// elemental: Math.floor(Arcini.isNumeric(elementalResistance) ? elementalResistance : 0)
-						// };
-					// }());
-					
-					// return {
-						// name: name,
-						// bonus: bonus,
-						// resistance: resistance
-					// };
-				// },
 				Character: function(characterName, baseAttributes) {
 					/*
 						characterName:string
