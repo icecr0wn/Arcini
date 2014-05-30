@@ -107,6 +107,9 @@ var Arcini = (function() {
 									remove: function(id) {
 										this.values[id] = Arcini.Formula.remove(this.values[id], attributes.spent.values[id]);
 									},
+									total: function() {
+										return Arcini.Formula.attributes.total(this.values);
+									}
 								};
 							}()),
 							spent: (function() {
@@ -124,6 +127,9 @@ var Arcini = (function() {
 									remove: function(id) {
 										this.values[id] = Arcini.Formula.remove(this.values[id], Arcini.Constants.Min.Spent());
 									},
+									total: function() {
+										return Arcini.Formula.attributes.total(this.values);
+									}
 								};
 							}()),
 							blood: function() {
