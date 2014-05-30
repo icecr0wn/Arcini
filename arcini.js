@@ -1,19 +1,27 @@
 var Arcini = (function() {
 	return {
-		Constants: (function(){
+		Constants: (function() {
 			return {
-				maxAttribute: function() {
-					return 30;
-				},
-				minAttribute: function() {
-					return 0;
-				},
-				minBloodAttribute: function() {
-					return 3;
-				},
-				minSpentAttribute: function() {
-					return 0;
-				}
+				Max: (function() {
+					return {
+						Attribute: function() {
+							return 30;
+						}
+					};
+				}()),
+				Min: (function() {
+					return {
+						Attribute: function() {
+							return 0;
+						},
+						Blood: function() {
+							return 3;
+						},
+						Spent: function() {
+							return 0;
+						}
+					};
+				}())
 			};
 		}()),
 		Formula: (function() {
@@ -28,7 +36,7 @@ var Arcini = (function() {
 					return Math.floor((blood/2 + main[0] + main[1])/5 + total/20);	
 				},
 				speed: function(air, total) {
-					return Math.floor(4 + air/5);
+					return Math.floor(4 + air/5 + total/20);
 				},
 				extra: function(attribute, total) {
 					return Math.floor(attribute/5 + total/10);
@@ -70,11 +78,11 @@ var Arcini = (function() {
 						return {
 							base: (function() {
 								return {
-									blood: Math.floor(angular.isNumber(baseAttributes[0]) ? baseAttributes[0] : Arcini.Constants.minBloodAttribute()),
-									air: Math.floor(angular.isNumber(baseAttributes[1]) ? baseAttributes[1] : Arcini.Constants.minAttribute()),
-									earth: Math.floor(angular.isNumber(baseAttributes[2]) ? baseAttributes[2] : Arcini.Constants.minAttribute()),
-									fire: Math.floor(angular.isNumber(baseAttributes[3]) ? baseAttributes[3] : Arcini.Constants.minAttribute()),
-									water: Math.floor(angular.isNumber(baseAttributes[4]) ? baseAttributes[4] : Arcini.Constants.minAttribute()),
+									blood: Math.floor(angular.isNumber(baseAttributes[0]) ? baseAttributes[0] : Arcini.Constants.Min.Blood()),
+									air: Math.floor(angular.isNumber(baseAttributes[1]) ? baseAttributes[1] : Arcini.Constants.Min.Attribute()),
+									earth: Math.floor(angular.isNumber(baseAttributes[2]) ? baseAttributes[2] : Arcini.Constants.Min.Attribute()),
+									fire: Math.floor(angular.isNumber(baseAttributes[3]) ? baseAttributes[3] : Arcini.Constants.Min.Attribute()),
+									water: Math.floor(angular.isNumber(baseAttributes[4]) ? baseAttributes[4] : Arcini.Constants.Min.Attribute()),
 									elementTotal: function() {
 										return this.air + this.earth + this.fire + this.water;
 									},
@@ -83,20 +91,20 @@ var Arcini = (function() {
 									},
 									add: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Arcini.Formula.add(this.blood, Arcini.Constants.maxAttribute()); break; 
-											case 1: this.air = Arcini.Formula.add(this.air, Arcini.Constants.maxAttribute()); break; 
-											case 2: this.earth = Arcini.Formula.add(this.earth, Arcini.Constants.maxAttribute()); break; 
-											case 3: this.fire = Arcini.Formula.add(this.fire, Arcini.Constants.maxAttribute()); break; 
-											case 4: this.water = Arcini.Formula.add(this.water, Arcini.Constants.maxAttribute()); break; 
+											case 0: this.blood = Arcini.Formula.add(this.blood, Arcini.Constants.Max.Attribute()); break; 
+											case 1: this.air = Arcini.Formula.add(this.air, Arcini.Constants.Max.Attribute()); break; 
+											case 2: this.earth = Arcini.Formula.add(this.earth, Arcini.Constants.Max.Attribute()); break; 
+											case 3: this.fire = Arcini.Formula.add(this.fire, Arcini.Constants.Max.Attribute()); break; 
+											case 4: this.water = Arcini.Formula.add(this.water, Arcini.Constants.Max.Attribute()); break; 
 										};
 									},
 									remove: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Arcini.Formula.remove(this.blood, Arcini.Constants.minBloodAttribute()); break; 
-											case 1: this.air = Arcini.Formula.remove(this.air, Arcini.Constants.minAttribute()); break; 
-											case 2: this.earth = Arcini.Formula.remove(this.earth, Arcini.Constants.minAttribute()); break; 
-											case 3: this.fire = Arcini.Formula.remove(this.fire, Arcini.Constants.minAttribute()); break; 
-											case 4: this.water = Arcini.Formula.remove(this.water, Arcini.Constants.minAttribute()); break; 
+											case 0: this.blood = Arcini.Formula.remove(this.blood, Arcini.Constants.Min.Blood()); break; 
+											case 1: this.air = Arcini.Formula.remove(this.air, Arcini.Constants.Min.Attribute()); break; 
+											case 2: this.earth = Arcini.Formula.remove(this.earth, Arcini.Constants.Min.Attribute()); break; 
+											case 3: this.fire = Arcini.Formula.remove(this.fire, Arcini.Constants.Min.Attribute()); break; 
+											case 4: this.water = Arcini.Formula.remove(this.water, Arcini.Constants.Min.Attribute()); break; 
 										};
 									}
 								};
@@ -125,11 +133,11 @@ var Arcini = (function() {
 									},
 									remove: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Arcini.Formula.remove(this.blood, Arcini.Constants.minSpentAttribute()); break;
-											case 1: this.air = Arcini.Formula.remove(this.air, Arcini.Constants.minSpentAttribute()); break;
-											case 2: this.earth = Arcini.Formula.remove(this.earth, Arcini.Constants.minSpentAttribute()); break;
-											case 3: this.fire = Arcini.Formula.remove(this.fire, Arcini.Constants.minSpentAttribute()); break;
-											case 4: this.water = Arcini.Formula.remove(this.water, Arcini.Constants.minSpentAttribute()); break;
+											case 0: this.blood = Arcini.Formula.remove(this.blood, Arcini.Constants.Min.Spent()); break;
+											case 1: this.air = Arcini.Formula.remove(this.air, Arcini.Constants.Min.Spent()); break;
+											case 2: this.earth = Arcini.Formula.remove(this.earth, Arcini.Constants.Min.Spent()); break;
+											case 3: this.fire = Arcini.Formula.remove(this.fire, Arcini.Constants.Min.Spent()); break;
+											case 4: this.water = Arcini.Formula.remove(this.water, Arcini.Constants.Min.Spent()); break;
 										};
 									}
 								};
