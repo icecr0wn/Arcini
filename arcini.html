@@ -24,86 +24,115 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td class='sub'>Attrib</td>
-								<td></td>
-								<td class='sub'>Spent</td>
+								<td class='sub_title' colspan='3'>Attrib</td>
+								<td class='sub_title' colspan='3'>Spent</td>
 								<td></td>
 							</tr>
 							<tr>
 								<td>Blood</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.base.remove(0)' value='-'>
+								</td>
 								<td class='input'>{{character.attributes.base.blood}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.base.remove(0)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.base.add(0)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.base.add(0)' value='+'>
+								</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.spent.remove(0)' value='-'>
 								</td>
 								<td class='input'>{{character.attributes.spent.blood}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.spent.remove(0)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.spent.add(0)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.spent.add(0)' value='+'>
 								</td>
 							<tr>
 								<td>Air</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.base.remove(1)' value='-'>
+								</td>
 								<td class='input'>{{character.attributes.base.air}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.base.remove(1)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.base.add(1)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.base.add(1)' value='+'>
+								</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.spent.remove(1)' value='-'>
 								</td>
 								<td class='input'>{{character.attributes.spent.air}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.spent.remove(1)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.spent.add(1)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.spent.add(1)' value='+'>
 								</td>
 							</tr>
 							<tr>
 								<td>Earth</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.base.remove(2)' value='-'>
+								</td>
 								<td class='input'>{{character.attributes.base.earth}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.base.remove(2)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.base.add(2)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.base.add(2)' value='+'>
+								</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.spent.remove(2)' value='-'>
 								</td>
 								<td class='input'>{{character.attributes.spent.earth}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.spent.remove(2)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.spent.add(2)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.spent.add(2)' value='+'>
 								</td>
 							</tr>
 							<tr>
 								<td>Fire</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.base.remove(3)' value='-'>
+								</td>
 								<td class='input'>{{character.attributes.base.fire}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.base.remove(3)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.base.add(3)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.base.add(3)' value='+'>
+								</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.spent.remove(3)' value='-'>
 								</td>
 								<td class='input'>{{character.attributes.spent.fire}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.spent.remove(3)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.spent.add(3)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.spent.add(3)' value='+'>
 								</td>
 							</tr>
 							<tr>
 								<td>Water</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.base.remove(4)' value='-'>
+								</td>
 								<td class='input'>{{character.attributes.base.water}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.base.remove(4)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.base.add(4)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.base.add(4)' value='+'>
+								</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.attributes.spent.remove(4)' value='-'>
 								</td>
 								<td class='input'>{{character.attributes.spent.water}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.attributes.spent.remove(4)'>-</a>
-									<a class='attribadd' ng-click='character.attributes.spent.add(4)'>+</a>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.attributes.spent.add(4)' value='+'>
 								</td>
 							</tr>
 							<tr>
 								<td><br></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>Damage</td>
-								<td class='input'>{{character.health.damage}}</td>
-								<td>
-									<a class='attribremove' ng-click='character.health.heal()'>-</a>
-									<a class='attribadd' ng-click='character.health.dealDamage()'>+</a>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='character.health.heal()' value='-'>
 								</td>
-							</tr>
+								<td class='input'>{{character.health.damage}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='character.health.dealDamage()' value='+'>
+								</td>
 						</table>
 						<br/>
 						<table>
@@ -119,8 +148,8 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td class='sub'>Attrib</td>
-								<td class='sub'>Resist</td>
+								<td class='sub_title'>Attrib</td>
+								<td class='sub_title'>Resist</td>
 							</tr>
 							<tr>
 								<td class='sub'>Blood</td>
@@ -149,8 +178,8 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td class='sub'>Offence</td>
-								<td class='sub'>Defence</td>
+								<td class='sub_title'>Offence</td>
+								<td class='sub_title'>Defence</td>
 							</tr>
 							<tr>
 								<td class='sub'>Physical</td>
@@ -164,8 +193,8 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td class='sub'>Damage</td>
-								<td class='sub'>Health</td>
+								<td class='sub_title'>Damage</td>
+								<td class='sub_title'>Health</td>
 							</tr>
 							<tr>
 								<td class='sub'>Extra</td>

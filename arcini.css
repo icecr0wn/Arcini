@@ -10,12 +10,6 @@ a:hover {
 a.remove{
 	color: red;
 }
-a.attribadd:hover {
-	text-decoration: normal;
-}
-a.attribremove {
-	color: red
-}
 
 body {
 	background-color: #FFFFDD;
@@ -43,25 +37,39 @@ table {
 	margin-right: 15px;
 }
 
-tr {
-	border: 0px;
+td.button_subtract {
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
 }
-
+td.button_add {
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 10px;
+}
 td.input {
 	background-color: #F5F6CE;
 	border: solid 1px #868A08;
 	text-align: right;	
+	width: 50px;
 }
 td.value {
-	background-color: lightgreen;
+	background-color: #F5F6CE;
 	border: solid 1px #21610B;
 	text-align: right;
 }
 td.title {
 	font-weight: bold;
 }
+td.sub_title {
+	font-style: italic;
+	text-align: center;
+}
 td.sub {
 	font-style: italic;
+	width: 40px;
+	padding-right: 5px;
 }
 td.remove {
 	text-align: center;
