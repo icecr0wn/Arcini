@@ -1,18 +1,13 @@
-Stats:
-Extra Damage:	Fire/5 + Total/10
-Extra Healing:	Water/5 + Total/10
-
 Notes:
  - A 3+ on a diceroll counts as a success.
  - All final result are rounded down to the nearest natural number.
- - When making an attack, multiple hits still account towards the same attack.
- - Every hit adds 'Extra Damage' to health damage done.
- - For every 'heal attack' hit, adds 'Extra Health' to healing done. No hits, will still heal normally.
+ - When making an attack, multiple hits still count towards the same attack.
+ - Every hit adds an extra dice up to 'Extra Damage' to damage done.
+ - For every 'heal attack' hit, adds an extra dice up to 'Extra Health' to healing done. No hits, will still heal normally.
 
 Character Generation:
  - Players
-	 - Start with 2 Blood.
-	 - Choose player god.
+	 - Choose player deity.
 	 - Increase a single attribute by 1.
 	 - Spend up to 60 shekels:
 		 - Buy equipment.
@@ -29,81 +24,55 @@ Character Generation:
 
 MONSTER GODS
 Istuion, God of Air
-	+2 Air
+	+2 Blood, +2 Air
 	+1 Air Resistance
 
 Tuuli, Goddess of Earth,
-	+2 Earth
+	+2 Blood, +2 Earth
 	+1 Earth Resistance
 
 Baedu, Goddess of Fire,
-	+2 Fire
+	+2 Blood, +2 Fire
 	+1 Fire Resistance
 
 Noll, God of Water
-	+2 Water
+	+2 Blood, +2 Water
 	+1 Water Resistance
 
 PLAYER GODS:
 Almarea, Goddess of Air
-	+3 Air
+	+3 Blood, +3 Air
 	+2 Air Resistance
-	When targeted by your weaves:
-		Forcefull Will:		for 2 rounds, enemy loses -1 to all resistances.
-		Eagle Wings:		for 2 rounds, ally gains +2 movement speed.
 
 Khalon, God of Earth
-	+3 Earth
+	+3 Blood, +3 Earth
 	+2 Earth Resistance
-	When targeted by your weaves:
-		Earth's Depths:		for 2 rounds, enemy cannot defend against your physical attacks.
-		Mountain's Rise:	for 2 rounds, ally gains +1 to all resistances.
 
 Barameathor, God of Fire
-	+3 Fire
+	+3 Blood, +3 Fire
 	+2 Fire Resistance
-	When targeted by your weaves:
-		Burning Flesh:		for 2 rounds, enemy takes 2 fire damage for every succesfull physical or elemental attack it makes.
-		Flames of Wrath:	for 2 rounds, ally deals +2 extra damage per physical or elemental attack made.
 
 Eferhilda, Goddess of Water
-	+3 Water
+	+3 Blood, +3 Water
 	+2 Water Resistance
-		Icy Curse:		for 2 rounds, enemy cannot defend against your elemental attacks.
-		Divine Blessing:	for 2 rounds, ally gains +3 health regeneration.
 
 Lovisa, Goddess of Air and Water
-	+2 Air, +1 Water
+	+3 Blood, +2 Air, +1 Water
 	+1 Air Resistance, +1 Water Resistance
-	When targeted by your weaves:
-		Storm of Thunder:	for 2 rounds, ??
-		Dark Clouds:		for 2 rounds, ??
 	
 Herion, God of Earh and Water
-	+2 Earth, +1 Water
+	+3 Blood, +2 Earth, +1 Water
 	+1 Earth Resistance, +1 Water Resistance
-	When targeted by your weaves:
-		Heavy Tsunami:		for 2 rounds, ??
-		Rain Drops:		for 2 rounds, ??
 
 Zebulon, God of Earth and Fire
-	+2 Earth, +1 Fire
+	+3 Blood, +2 Earth, +1 Fire
 	+1 Earth Resistance, +1 Fire Resistance
-	When targeted by your weaves:
-		Scorched Earth:		for 2 rounds, ??
-		Swords of Fire:		for 2 rounds, ??
 
 Jade, Goddess of Fire and Air
-	+2 Fire, +1 Air
+	+3 Blood, +2 Fire, +1 Air
 	+1 Fire Resistance, +1 Air Resistance
-	When targeted by your weaves:
-		Storm of Fire:		for 2 rounds, ??
-		Fiery Whirlwind:	for 2 rounds, ??
 
 Naerdiel, Goddess of Blood
-	+2 Blood, +1 to any single elemental attribute
+	+5 Blood, +1 to any single elemental attribute
 	+1 Physical Resistance, +1 Resistance to chosen element
-	When targeted by your weaves:
-		Death Grip:		for 2 rounds, ??
-		Life Drain:		for 2 rounds, ??
 
