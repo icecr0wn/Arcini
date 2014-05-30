@@ -18,7 +18,7 @@ app.directive('integer', function() {
         require: 'ngModel',
         link: function(scope, ele, attr, ctrl) {
             ctrl.$parsers.unshift(function(viewValue) {
-            	if (viewValue == undefined || viewValue == null) {
+            	if (!viewValue) {
             		return 0;
             	}
                 return parseInt(viewValue);
