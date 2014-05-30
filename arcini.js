@@ -16,6 +16,37 @@ var Arcini = (function() {
 				}
 			};
 		}()),
+		Formula: (function() {
+			return {
+				resistance: function(attribute, total) {
+					return Math.floor(attribute/5 + total/20);
+				},
+				offence: function(blood, main, total) {
+					return Math.floor(0.55 + (blood/2 + main[0] + main[1])/5 + total/20);	
+				},
+				defence: function(blood, main, total) {
+					return Math.floor((blood/2 + main[0] + main[1])/5 + total/20);	
+				},
+				speed: function(air, total) {
+					return Math.floor(4 + air/5);
+				},
+				extra: function(attribute, total) {
+					return Math.floor(attribute/5 + total/10);
+				},
+				health: function(blood, earth) {
+					return Math.floor(blood*3 + earth);
+				},
+				add: function(value, maximum) {
+					return Math.min(value + 1, maximum);
+				},
+				remove: function(value, minimum) {
+					return Math.max(value - 1, minimum);
+				},
+				attribute: function(value, spent) {
+					return value - spent;
+				}
+			};
+		}()),
 		Model: (function() {
 			return {
 				Character: function(characterName, baseAttributes) {
@@ -27,7 +58,7 @@ var Arcini = (function() {
 					 * 					 earth:int,
 					 * 					 fire:int,
 					 * 					 water:int
-					 * :int	]
+					 * 				  ]
 					 */
 					var name = (!characterName ? '' : characterName);
 					
@@ -52,20 +83,20 @@ var Arcini = (function() {
 									},
 									add: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Math.min(Arcini.Constants.maxAttribute(), this.blood + 1); break;
-											case 1: this.air = Math.min(Arcini.Constants.maxAttribute(), this.air + 1); break;
-											case 2: this.earth = Math.min(Arcini.Constants.maxAttribute(), this.earth + 1); break;
-											case 3: this.fire = Math.min(Arcini.Constants.maxAttribute(), this.fire + 1); break;
-											case 4: this.water = Math.min(Arcini.Constants.maxAttribute(), this.water + 1); break;
+											case 0: this.blood = Arcini.Formula.add(this.blood, Arcini.Constants.maxAttribute()); break; 
+											case 1: this.air = Arcini.Formula.add(this.air, Arcini.Constants.maxAttribute()); break; 
+											case 2: this.earth = Arcini.Formula.add(this.earth, Arcini.Constants.maxAttribute()); break; 
+											case 3: this.fire = Arcini.Formula.add(this.fire, Arcini.Constants.maxAttribute()); break; 
+											case 4: this.water = Arcini.Formula.add(this.water, Arcini.Constants.maxAttribute()); break; 
 										};
 									},
 									remove: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Math.max(Arcini.Constants.minBloodAttribute(), this.blood - 1); break;
-											case 1: this.air = Math.max(Arcini.Constants.minAttribute(), this.air - 1); break;
-											case 2: this.earth = Math.max(Arcini.Constants.minAttribute(), this.earth - 1); break;
-											case 3: this.fire = Math.max(Arcini.Constants.minAttribute(), this.fire - 1); break;
-											case 4: this.water = Math.max(Arcini.Constants.minAttribute(), this.water - 1); break;
+											case 0: this.blood = Arcini.Formula.remove(this.blood, Arcini.Constants.minBloodAttribute()); break; 
+											case 1: this.air = Arcini.Formula.remove(this.air, Arcini.Constants.minAttribute()); break; 
+											case 2: this.earth = Arcini.Formula.remove(this.earth, Arcini.Constants.minAttribute()); break; 
+											case 3: this.fire = Arcini.Formula.remove(this.fire, Arcini.Constants.minAttribute()); break; 
+											case 4: this.water = Arcini.Formula.remove(this.water, Arcini.Constants.minAttribute()); break; 
 										};
 									}
 								};
@@ -85,44 +116,44 @@ var Arcini = (function() {
 									},
 									add: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Math.min(attributes.base.blood, this.blood + 1); break;
-											case 1: this.air = Math.min(attributes.base.air, this.air + 1); break;
-											case 2: this.earth = Math.min(attributes.base.earth, this.earth + 1); break;
-											case 3: this.fire = Math.min(attributes.base.fire, this.fire + 1); break;
-											case 4: this.water = Math.min(attributes.base.water, this.water + 1); break;
+											case 0: this.blood = Arcini.Formula.add(this.blood, attributes.base.blood); break;
+											case 1: this.air = Arcini.Formula.add(this.air, attributes.base.air); break;
+											case 2: this.earth = Arcini.Formula.add(this.earth, attributes.base.earth); break;
+											case 3: this.fire = Arcini.Formula.add(this.fire, attributes.base.fire); break;
+											case 4: this.water = Arcini.Formula.add(this.water, attributes.base.water); break;
 										};
 									},
 									remove: function(attribute) {
 										switch (attribute) {
-											case 0: this.blood = Math.max(Arcini.Constants.minSpentAttribute(), this.blood - 1); break;
-											case 1: this.air = Math.max(Arcini.Constants.minSpentAttribute(), this.air - 1); break;
-											case 2: this.earth = Math.max(Arcini.Constants.minSpentAttribute(), this.earth - 1); break;
-											case 3: this.fire = Math.max(Arcini.Constants.minSpentAttribute(), this.fire - 1); break;
-											case 4: this.water = Math.max(Arcini.Constants.minSpentAttribute(), this.water - 1); break;
+											case 0: this.blood = Arcini.Formula.remove(this.blood, Arcini.Constants.minSpentAttribute()); break;
+											case 1: this.air = Arcini.Formula.remove(this.air, Arcini.Constants.minSpentAttribute()); break;
+											case 2: this.earth = Arcini.Formula.remove(this.earth, Arcini.Constants.minSpentAttribute()); break;
+											case 3: this.fire = Arcini.Formula.remove(this.fire, Arcini.Constants.minSpentAttribute()); break;
+											case 4: this.water = Arcini.Formula.remove(this.water, Arcini.Constants.minSpentAttribute()); break;
 										};
 									}
 								};
 							}()),
 							blood: function() {
-								return this.base.blood - this.spent.blood;
+								return Arcini.Formula.attribute(this.base.blood, this.spent.blood);
 							},
 							air: function() {
-								return this.base.air - this.spent.air;
+								return Arcini.Formula.attribute(this.base.air, this.spent.air);
 							},
 							earth: function() {
-								return this.base.earth - this.spent.earth;
+								return Arcini.Formula.attribute(this.base.earth, this.spent.earth);
 							},
 							fire: function() {
-								return this.base.fire - this.spent.fire;
+								return Arcini.Formula.attribute(this.base.fire, this.spent.fire);
 							},
 							water: function() {
-								return this.base.water - this.spent.water;
+								return Arcini.Formula.attribute(this.base.water, this.spent.water);
 							},
 							elementTotal: function() {
-								return this.base.elementTotal() - this.spent.elementTotal();
+								return Arcini.Formula.attribute(this.base.elementTotal(), this.spent.elementTotal());
 							},
 							total: function() {
-								return this.base.total() - this.spent.total();
+								return Arcini.Formula.attribute(this.base.total(), this.spent.total());
 							}
 						};
 					}());
@@ -130,19 +161,19 @@ var Arcini = (function() {
 					var resistances = (function() {
 						return {
 							physical: function() {
-								return Math.floor(attributes.blood()/5 + attributes.total()/20);
+								return Arcini.Formula.resistance(attributes.blood(), attributes.total());
 							},
 							air: function() {
-								return Math.floor(attributes.air()/5 + attributes.total()/20);
+								return Arcini.Formula.resistance(attributes.air(), attributes.total());
 							},
 							earth: function() {
-								return Math.floor(attributes.earth()/5 + attributes.total()/20);
+								return Arcini.Formula.resistance(attributes.earth(), attributes.total());
 							},
 							fire: function() {
-								return Math.floor(attributes.fire()/5 + attributes.total()/20);
+								return Arcini.Formula.resistance(attributes.fire(), attributes.total());
 							},
 							water: function() {
-								return Math.floor(attributes.water()/5 + attributes.total()/20);
+								return Arcini.Formula.resistance(attributes.water(), attributes.total());
 							}
 						};
 					}());
@@ -150,10 +181,10 @@ var Arcini = (function() {
 					var offence = (function() {
 						return {
 							physical: function () {
-								return  Math.floor(0.55 + (attributes.blood()/2 + attributes.earth() + attributes.fire())/5 + attributes.total()/20);
+								return Arcini.Formula.offence(attributes.blood(), [ attributes.earth(), attributes.fire() ], attributes.total());
 							},
 							elemental: function() {
-								return Math.floor(0.55 + (attributes.blood()/2 + attributes.air() + attributes.fire())/5 + attributes.total()/20);
+								return Arcini.Formula.offence(attributes.blood(), [ attributes.air(), attributes.fire() ], attributes.total());
 							}
 						};
 					}());
@@ -161,10 +192,10 @@ var Arcini = (function() {
 					var defence = (function() {
 						return {
 							physical: function() {
-								return Math.floor((attributes.blood()/2 + attributes.earth() + attributes.water())/5 + attributes.total()/20);
+								return Arcini.Formula.defence(attributes.blood(), [ attributes.earth(), attributes.water() ], attributes.total());
 							},
 							elemental: function() {
-								return Math.floor((attributes.blood()/2 + attributes.air() + attributes.water())/5 + attributes.total()/20);
+								return Arcini.Formula.defence(attributes.blood(), [ attributes.air(), attributes.water() ], attributes.total());	
 							}
 						};
 					}());
@@ -173,31 +204,31 @@ var Arcini = (function() {
 						return {
 							damage: 0,
 							max: function() {
-								return Math.floor(attributes.blood()*3 + attributes.earth());
+								return Arcini.Formula.health(attributes.blood(), attributes.earth());
 							},
 							current: function() {
 								return this.max() - this.damage;
 							},
 							dealDamage: function() {
-								this.damage = Math.min(this.max(), this.damage + 1);
+								this.damage = Arcini.Formula.add(this.damage, this.max());
 							},
 							heal: function() {
-								this.damage = Math.max(0, this.damage - 1);
+								this.damage = Arcini.Formula.remove(this.damage, 0);
 							}
 						};
 					}());
 
 					var speed = function() {
-						return Math.floor(4 + attributes.air()/5);
+						return Arcini.Formula.speed(attributes.air(), attributes.total());
 					};
 					
 					var extra = (function() {
 						return {
 							damage: function() {
-								return Math.floor(attributes.fire()/5 + attributes.total()/10);
+								return Arcini.Formula.extra(attributes.fire(), attributes.total());
 							},
 							health: function() {
-								return Math.floor(attributes.water()/5 + attributes.total()/10);
+								return Arcini.Formula.extra(attributes.water(), attributes.total());
 							}
 						};
 					}());
