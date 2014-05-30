@@ -74,7 +74,7 @@ var Arcini = (function() {
 			return {
 				Character: function(characterName, baseAttributes) {
 					/*
-					 * class Character(
+					 * class Character:
 					 * 	characterName:string,
 					 * 	baseAttributes:[ blood:int,
 					 * 					 air:int,
@@ -83,6 +83,7 @@ var Arcini = (function() {
 					 * 					 water:int
 					 * 				  ]
 					 */
+
 					var name = (!characterName ? '' : characterName);
 					
 					if (!baseAttributes) {
@@ -241,7 +242,7 @@ var Arcini = (function() {
 						speed: speed,
 						extra: extra
 					};
-				}
+				},
 			};
 		}())
 	};
