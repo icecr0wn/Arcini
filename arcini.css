@@ -32,6 +32,10 @@ input[type="text"]:focus {
 	border: solid 1px #4B610B;
 }
 
+select {
+	width: 100%;
+}
+
 table {
 	border-collapse: collapse;
 	margin-right: 15px;
@@ -41,12 +45,12 @@ td.button_subtract {
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
+	padding-left: 10px;
 }
 td.button_add {
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
-	padding-right: 10px;
 }
 td.input {
 	background-color: #F5F6CE;

@@ -72,7 +72,7 @@ Jade, Goddess of Fire and Air
 	+3 Blood, +2 Fire, +1 Air
 	+1 Fire Resistance, +1 Air Resistance
 
-Naerdiel, Goddess of Blood
-	+5 Blood, +1 to any single elemental attribute
-	+1 Physical Resistance, +1 Resistance to chosen element
+Naerdiel, Goddess of Death
+	+5 Blood, +1 Air
+	+2 Physical Resistance
 
