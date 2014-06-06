@@ -4,7 +4,7 @@ var Arcini = (function() {
 			var max = (function() {
 				var attribute = function() {
 					return 30;
-				}
+				};
 				return {
 					Attribute: attribute
 				};
@@ -33,7 +33,7 @@ var Arcini = (function() {
 				return {
 					Base: base
 				};
-			}())
+			}());
 
 			return {
 				Max: max,
@@ -132,7 +132,7 @@ var Arcini = (function() {
 
 							var add = function(id) {
 								this.values[id] = Arcini.Formula.add(this.values[id], Arcini.Constants.Max.Attribute());
-							}
+							};
 
 							var remove = function(id) {
 								this.values[id] = Arcini.Formula.remove(this.values[id], attributes.spent.values[id]);
@@ -245,7 +245,7 @@ var Arcini = (function() {
 
 						var elemental = function() {
 							return Arcini.Formula.defence(attributes.blood(), [ attributes.air(), attributes.fire() ], attributes.total());
-						}
+						};
 
 						return {
 							physical: physical,
@@ -260,7 +260,7 @@ var Arcini = (function() {
 
 						var elemental = function() {
 							return Arcini.Formula.defence(attributes.blood(), [ attributes.air(), attributes.water() ], attributes.total());
-						}
+						};
 
 						return {
 							physical: physical,
