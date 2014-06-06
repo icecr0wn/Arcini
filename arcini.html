@@ -89,12 +89,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td>Deity</td>
-								<td colspan='3'><select ng-model='character.deity' ng-options='opt as opt.name for opt in deities track by opt.name'></select></td>
-							</tr>
-							</tr>
-							<tr>
-								<td>Damage</td>
+								<td class='title'>Damage</td>
 								<td class='button_subtract'>
 									<input type='submit' ng-click='character.health.heal()' value='-'>
 								</td>
@@ -102,6 +97,15 @@
 								<td class='button_add'>
 									<input type='submit' ng-click='character.health.dealDamage()' value='+'>
 								</td>
+							</tr>
+							<tr>
+								<td><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Deity</td>
+								<td colspan='3'><select ng-model='character.deity' ng-options='opt as opt.name for opt in deities track by opt.name'></select></td>
+							</tr>
+
 						</table>
 						<br/>
 						<table>
