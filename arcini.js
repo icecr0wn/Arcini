@@ -165,7 +165,6 @@ var Arcini = (function() {
 						var spent = (function() {
 							var values = Arcini.Constants.Attributes.Base();
 							var add = function(id) {
-								console.log(deity.value.attributes);
 								this.values[id] = Arcini.Formula.add(this.values[id], attributes.base.values[id] + deity.value.attributes[id]);
 							};
 
