@@ -1,7 +1,7 @@
 // For testing only
 var app = angular.module('testapp', []);
 app.controller('testctl', function($scope) {
-	$scope.deities = Arcini.Data.Deity().deities;	
+	$scope.deities = Arcini.Constants.Deities().List;	
 
 	$scope.characters = [
 		new Arcini.Model.Character('Jonathan', [ 0, 0, 0, 0, 0 ], $scope.deities[6]),
