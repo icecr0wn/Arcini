@@ -138,11 +138,6 @@ var Arcini = (function() {
 						baseAttributes = Arcini.Constants.Attributes.Base();
 					};
 					
-					var getDeity = function()
-					{
-						return deity;
-					};
-					
 					var attributes = (function() {
 						var base = (function() {
 							var values = baseAttributes;
