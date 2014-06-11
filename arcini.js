@@ -35,41 +35,10 @@ var Arcini = (function() {
 				};
 			}());
 			
-			var deity = (function() {
-				var base = function() {
-					return new Arcini.Model.Deity('', Arcini.Constants.Attributes.Base(), Arcini.Constants.Attributes.Base());
-				};
-
-				return {
-					Base: base,
-				};
-			}());
-				
-			var deities = function() {
-				var list = [
-					{ id: 0, name: '<choose>', value: new Arcini.Model.Deity('<choose>', [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ]) },
-					{ id: 1, name: 'Almarea', value: new Arcini.Model.Deity('Almarea', [ 3, 3, 0, 0, 0 ], [ 0, 2, 0, 0, 0 ]) },
-					{ id: 2, name: 'Baramethor', value: new Arcini.Model.Deity('Baramaethor', [ 3, 0, 0, 3, 0 ], [ 0, 0, 0, 2, 0 ]) },
-					{ id: 3, name: 'Eferhilda', value: new Arcini.Model.Deity('Eferhilda', [ 3, 0, 0, 0, 3 ], [ 0, 0, 0, 0, 2 ]) },
-					{ id: 4, name: 'Herion', value: new Arcini.Model.Deity('Herion', [ 3, 0, 2, 0, 1 ], [ 0, 0, 1, 0, 1 ]) },
-					{ id: 5, name: 'Jade', value: new Arcini.Model.Deity('Jade', [ 3, 1, 0, 2, 0 ], [ 0, 1, 0, 1, 0 ]) },
-					{ id: 6, name: 'Khalon', value: new Arcini.Model.Deity('Khalon', [ 3, 0, 3, 0, 0 ], [ 0, 0, 2, 0, 0 ]) },
-					{ id: 7, name: 'Lovisa', value: new Arcini.Model.Deity('Lovisa', [ 3, 2, 0, 0, 1 ], [ 0, 1, 0, 0, 1 ]) },
-					{ id: 8, name: 'Naerdiel', value: new Arcini.Model.Deity('Naerdiel', [ 5, 1, 0, 0, 0 ], [ 2, 0, 0, 0, 0 ]) },
-					{ id: 9, name: 'Zebulon', value: new Arcini.Model.Deity('Zebulon', [ 3, 0, 2, 1, 0 ], [ 0, 0, 1, 1, 0 ]) }
-				];
-				
-				return {
-					List: list
-				};
-			};			
-
 			return {
 				Max: max,
 				Min: min,
 				Attributes: attributes,
-				Deity: deity,
-				Deities: deities
 			};
 		}()),
 		Formula: (function() {
@@ -185,7 +154,7 @@ var Arcini = (function() {
 							var values = Arcini.Constants.Attributes.Base();
 
 							var add = function(id) {
-								this.values[id] = Arcini.Formula.add(this.values[id], attributes.base.values[id] + Arcini.Constants.Deities().List[deity.index()].value.attributes[id]);
+								this.values[id] = Arcini.Formula.add(this.values[id], attributes.base.values[id] + deity.attribute(id));
 							};
 
 							var remove = function(id) 	{
@@ -205,27 +174,27 @@ var Arcini = (function() {
 						}());
 
 						var blood = function() {
-							return Arcini.Formula.attribute(this.base.values[0], this.spent.values[0], Arcini.Constants.Deities().List[deity.index()].value.attributes[0]);
+							return Arcini.Formula.attribute(this.base.values[0], this.spent.values[0], deity.attribute(0));
 						};
 
 						var air = function() {
-							return Arcini.Formula.attribute(this.base.values[1], this.spent.values[1], Arcini.Constants.Deities().List[deity.index()].value.attributes[1]);
+							return Arcini.Formula.attribute(this.base.values[1], this.spent.values[1], deity.attribute(1));
 						};
 
 						var earth = function() {
-							return Arcini.Formula.attribute(this.base.values[2], this.spent.values[2], Arcini.Constants.Deities().List[deity.index()].value.attributes[2]);
+							return Arcini.Formula.attribute(this.base.values[2], this.spent.values[2], deity.attribute(2));
 						};
 
 						var fire = function() {
-							return Arcini.Formula.attribute(this.base.values[3], this.spent.values[3], Arcini.Constants.Deities().List[deity.index()].value.attributes[3]);
+							return Arcini.Formula.attribute(this.base.values[3], this.spent.values[3], deity.attribute(3));
 						};
 
 						var water = function() {
-							return Arcini.Formula.attribute(this.base.values[4], this.spent.values[4], Arcini.Constants.Deities().List[deity.index()].value.attributes[4]);
+							return Arcini.Formula.attribute(this.base.values[4], this.spent.values[4], deity.attribute(4));
 						};
 
 						var total = function() {this
-							return Arcini.Formula.attribute(Arcini.Formula.attributes.total(this.base.values), Arcini.Formula.attributes.total(this.spent.values), Arcini.Formula.attributes.total(Arcini.Constants.Deities().List[deity.index()].value.attributes));
+							return Arcini.Formula.attribute(Arcini.Formula.attributes.total(this.base.values), Arcini.Formula.attributes.total(this.spent.values), Arcini.Formula.attributes.total(deity.attributes()));
 						};
 
 						return {
@@ -242,23 +211,23 @@ var Arcini = (function() {
 
 					var resistances = (function() {
 						var physical = function() {
-							return Arcini.Formula.resistance(attributes.blood(), attributes.total(), Arcini.Constants.Deities().List[deity.index()].value.resistances[0]);
+							return Arcini.Formula.resistance(attributes.blood(), attributes.total(), deity.resistance(0));
 						};
 
 						var air = function() {
-							return Arcini.Formula.resistance(attributes.air(), attributes.total(), Arcini.Constants.Deities().List[deity.index()].value.resistances[1]);
+							return Arcini.Formula.resistance(attributes.air(), attributes.total(), deity.resistance(1));
 						};	
 
 						var earth = function() {
-							return Arcini.Formula.resistance(attributes.earth(), attributes.total(), Arcini.Constants.Deities().List[deity.index()].value.resistances[2]);
+							return Arcini.Formula.resistance(attributes.earth(), attributes.total(), deity.resistance(2));
 						};
 
 						var fire = function() {
-							return Arcini.Formula.resistance(attributes.fire(), attributes.total(), Arcini.Constants.Deities().List[deity.index()].value.resistances[3]);
+							return Arcini.Formula.resistance(attributes.fire(), attributes.total(), deity.resistance(3));
 						};
 
 						var water = function() {
-							return Arcini.Formula.resistance(attributes.water(), attributes.total(), Arcini.Constants.Deities().List[deity.index()].value.resistances[4]);
+							return Arcini.Formula.resistance(attributes.water(), attributes.total(), deity.resistance(4));
 						};
 
 						return {
@@ -348,19 +317,35 @@ var Arcini = (function() {
 					}());
 
 					var deity = (function() {
-						var listIndex = (!chosenDeity ? 0 : chosenDeity);
+						var id = chosenDeity.id
+						var value = chosenDeity.value;
 						
-						var set = function(deity) {
-							listIndex = (!deity ? 0 : deity.id);
+						var set = function(chosenDeity) {
+							value = chosenDeity.value;
 						};
 						
 						var index = function() {
-							return listIndex;
+							return id;
+						};
+						
+						var attribute = function(index) {
+							return value.attributes[index];
+						};
+						
+						var attributes = function(index) {
+							return value.attributes;
+						};
+
+						var resistance = function(index) {
+							return value.resistances[index];
 						};
 						
 						return {
 							set: set,
-							index: index
+							index: index,
+							attribute: attribute,
+							attributes: attributes,
+							resistance: resistance
 						};
 					}());
 					

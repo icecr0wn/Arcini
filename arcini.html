@@ -104,7 +104,9 @@
 							<tr>
 								<td class='title'>Deity</td>
 								<td colspan='2'>
-									<select ng-model='selectedDeity' ng-options="deity as deity.name for deity in deities" ng-init='selectedDeity = deities[service.character.get($index).deity.index()]' ng-change="service.character.get($index).deity.set(selectedDeity)">
+									<select ng-model='selectedDeity' ng-options="deity as deity.name for deity in list.deities"
+											ng-init='selectedDeity = list.deities[service.character.get($index).deity.index()]'
+											ng-change="service.character.get($index).deity.set(selectedDeity)">
 										{{selectedDeity}}
 									</select>
 								</td>
