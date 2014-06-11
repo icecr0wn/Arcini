@@ -1,20 +1,20 @@
 var arcini = angular.module('Arcini.Module.Arcini', []);
 
-arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', function(service) {
+arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', 'Arcini.Service.Constants', function(service, constants) {
 	var create = function(name, attributes, deity) {
 		if (!name) {
 			name = '<choose name>'
 		};
 
 		if (!attributes) {
-			attributes = [ 0, 0, 0, 0, 0 ];
+			attributes = constants.Attributes.Base();
 		};
 
 		if (!deity) {
 			deity = 0;
 		}
 
-		return new Arcini.Model.Character(name, [ 0, 0, 0, 0, 0 ], service.get(0));
+		return new Arcini.Model.Character(name, attributes, service.get(0), constants);
 	};
 
 	return {
@@ -22,18 +22,18 @@ arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', function(se
 	};
 }]);
 
-arcini.factory('Arcini.Factory.Deity', function() {
+arcini.factory('Arcini.Factory.Deity', [ 'Arcini.Service.Constants' , function(constants) {
 	var create = function(name, attributes, resistances) {
 		if (!name) {
 			name = '<choose>'
 		};
 		
 		if (!attributes) {
-			attributes = [ 0, 0, 0, 0, 0 ];
+			attributes = constants.Attributes.Base();
 		};
 		
 		if (!resistances) {
-			resistances = [ 0, 0, 0, 0, 0 ];
+			resistances = constants.Attributes.Base();
 		}
 		
 		return new Arcini.Model.Deity(name, attributes, resistances);
@@ -42,7 +42,7 @@ arcini.factory('Arcini.Factory.Deity', function() {
 	return {
 		create: create
 	};
-});
+}]);
 
 arcini.service('Arcini.Service.Character', [ 'Arcini.Factory.Character', function(factory) {
 	var characters = [];
@@ -99,7 +99,49 @@ arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factor
 	};
 }]);
 
-arcini.controller('Arcini.Controller.Creator', [ '$scope', 'Arcini.Service.Character', 'Arcini.Service.Deity', function($scope, character, deity) {
+arcini.service('Arcini.Service.Constants', function() {
+	var max = (function() {
+		var attribute = function() {
+			return 30;
+		};
+		return {
+			Attribute: attribute
+		};
+	}());
+
+	var min = (function() {
+		var attribute = function() {
+			return 0;
+		};
+
+		var spent = function() {
+			return 0;
+		};
+
+		return {
+			Attribute: attribute,
+			Spent: spent
+		};
+	}());
+
+	var attributes = (function() {
+		var base = function() {
+			return [ 0, 0, 0, 0, 0 ];
+		};
+		
+		return {
+			Base: base
+		};
+	}());
+	
+	return {
+		Max: max,
+		Min: min,
+		Attributes: attributes,
+	};
+});
+
+arcini.controller('Arcini.Controller.Creator', [ '$scope', 'Arcini.Service.Character', 'Arcini.Service.Deity', 'Arcini.Service.Constants', function($scope, character, deity, constants) {
 	$scope.service = {};
 	$scope.service.character = character;
 	$scope.service.deity = deity;
@@ -107,6 +149,8 @@ arcini.controller('Arcini.Controller.Creator', [ '$scope', 'Arcini.Service.Chara
 	$scope.list = {};
 	$scope.list.characters = character.list();
 	$scope.list.deities = deity.list();
+	
+	$scope.constants = constants;
 
 	$scope.addCharacter = function() {
 		character.add();

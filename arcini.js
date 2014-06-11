@@ -1,46 +1,5 @@
 var Arcini = (function() {
 	return {
-		Constants: (function() {
-			var max = (function() {
-				var attribute = function() {
-					return 30;
-				};
-				return {
-					Attribute: attribute
-				};
-			}());
-
-			var min = (function() {
-				var attribute = function() {
-					return 0;
-				};
-
-				var spent = function() {
-					return 0;
-				};
-
-				return {
-					Attribute: attribute,
-					Spent: spent
-				};
-			}());
-
-			var attributes = (function() {
-				var base = function() {
-					return [ 0, 0, 0, 0, 0 ];
-				};
-				
-				return {
-					Base: base
-				};
-			}());
-			
-			return {
-				Max: max,
-				Min: min,
-				Attributes: attributes,
-			};
-		}()),
 		Formula: (function() {
 			var resistance = function(attribute, total, deity) {
 				return Math.floor(attribute/5 + total/20 + deity);
@@ -108,30 +67,21 @@ var Arcini = (function() {
 		}()),
 		Model: (function() {
 			return {
-				Character: function(characterName, baseAttributes, chosenDeity) {
-					/*
-					 * class Character:
-					 * 	characterName:string,
-					 * 	baseAttributes:[ blood:int,
-					 * 					 air:int,
-					 * 					 earth:int,
-					 * 					 fire:int,
-					 * 					 water:int
-					 * 				  ]
-					 */
-
+				Character: function(characterName, baseAttributes, chosenDeity, constantsService) {
 					var name = (!characterName ? '' : characterName);
 
 					if (!baseAttributes) {
-						baseAttributes = Arcini.Constants.Attributes.Base();
+						baseAttributes = constants.Attributes.Base();
 					};
+					
+					var constants = constantsService;
 					
 					var attributes = (function() {
 						var base = (function() {
 							var values = baseAttributes;
 
 							var add = function(id) {
-								this.values[id] = Arcini.Formula.add(this.values[id], Arcini.Constants.Max.Attribute());
+								this.values[id] = Arcini.Formula.add(this.values[id], constants.Max.Attribute());
 							};
 
 							var remove = function(id) {
@@ -151,14 +101,14 @@ var Arcini = (function() {
 						}());
 
 						var spent = (function() {
-							var values = Arcini.Constants.Attributes.Base();
+							var values = constants.Attributes.Base();
 
 							var add = function(id) {
 								this.values[id] = Arcini.Formula.add(this.values[id], attributes.base.values[id] + deity.attribute(id));
 							};
 
 							var remove = function(id) 	{
-								this.values[id] = Arcini.Formula.remove(this.values[id], Arcini.Constants.Min.Spent());
+								this.values[id] = Arcini.Formula.remove(this.values[id], constants.Min.Spent());
 							};
 
 							var total = function() {
@@ -380,8 +330,8 @@ var Arcini = (function() {
 					 */
 					
 					var name = (!deityName ? '' : deityName);
-					var attributes = (!baseAttributes ? Arcini.Constants.Attributes.Base() : baseAttributes);					
-					var resistances = (!baseAttributes ? Arcini.Constants.Attributes.Base() : baseResistances);					
+					var attributes = (!baseAttributes ? constants.Attributes.Base() : baseAttributes);					
+					var resistances = (!baseAttributes ? constants.Attributes.Base() : baseResistances);					
 
 					return {
 						name: name,
