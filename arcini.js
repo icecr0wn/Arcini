@@ -351,7 +351,7 @@ var Arcini = (function() {
 						var listIndex = (!chosenDeity ? 0 : chosenDeity);
 						
 						var set = function(deity) {
-							this.listIndex = (!deity ? 0 : deity);
+							listIndex = (!deity ? 0 : deity.id);
 						};
 						
 						var index = function() {

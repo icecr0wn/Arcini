@@ -50,7 +50,11 @@ arcini.service('Arcini.Service.Character', [ 'Arcini.Factory.Character', functio
 }]);
 
 arcini.controller('Arcini.Controller.Creator', [ '$scope', 'Arcini.Service.Character', function($scope, character) {
-	$scope.characters = character.list();
+	$scope.service = {};
+	$scope.service.character = character;
+	
+	$scope.list = {};
+	$scope.list.characters = character.list();
 
 	$scope.deities = Arcini.Constants.Deities().List;
 
@@ -59,7 +63,6 @@ arcini.controller('Arcini.Controller.Creator', [ '$scope', 'Arcini.Service.Chara
 	};
 
 	$scope.deleteCharacter = function(index) {
-		console.log('About to remove character[' + index + ']');
 		character.remove(index);
 	};
 }]);
