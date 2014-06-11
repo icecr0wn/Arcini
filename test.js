@@ -4,8 +4,7 @@ app.controller('testctl', function($scope) {
 	$scope.deities = Arcini.Constants.Deities().List;
 
 	$scope.characters = [
-		new Arcini.Model.Character('Jonathan', [ 0, 0, 0, 0, 0 ], 6),
-		new Arcini.Model.Character('Cartha', [ 0, 0, 0, 0, 0 ], 3)
+		new Arcini.Model.Character('Cartha', [ 1, 0, 0, 0, 3 ], 3)
 	];
 
 	$scope.deleteCharacter = function(idx) {
