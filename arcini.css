@@ -52,16 +52,11 @@ td.button_add {
 	margin: 0px;
 	padding: 0px;
 }
-td.input {
+td.value {
 	background-color: #F5F6CE;
 	border: solid 1px #868A08;
 	text-align: right;	
 	width: 50px;
-}
-td.value {
-	background-color: #F5F6CE;
-	border: solid 1px #21610B;
-	text-align: right;
 }
 td.title {
 	font-weight: bold;
