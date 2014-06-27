@@ -1,6 +1,6 @@
 var arcini = angular.module('Arcini.Module.Arcini', []);
 
-arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', 'Arcini.Service.Constants', 'Arcini.Service.Formula', function(service, constants, formula) {
+arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', 'Arcini.Service.Constants', function(service, constants) {
 	var create = function(name, attributes, deity) {
 		if (!name) {
 			name = '<choose name>'
@@ -14,7 +14,7 @@ arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', 'Arcini.Ser
 			deity = 0;
 		}
 
-		return new Arcini.Model.Character(name, attributes, service.get(0), constants, formula);
+		return new Arcini.Model.Character(name, attributes, service.get(0), constants);
 	};
 
 	return {
@@ -138,72 +138,6 @@ arcini.service('Arcini.Service.Constants', function() {
 		Max: max,
 		Min: min,
 		Attributes: attributes,
-	};
-});
-
-arcini.service('Arcini.Service.Formula', function() {
-	var resistance = function(attribute, total, deity) {
-		return Math.floor(attribute/5 + total/20 + deity);
-	};
-
-	var offence = function(blood, main, total) {
-		return Math.floor(0.55 + (blood/2 + main[0] + main[1])/5 + total/20);
-	};
-
-	var defence = function(blood, main, total) {
-		return Math.floor((blood/2 + main[0] + main[1])/5 + total/20);
-	};
-
-	var speed = function(air, total) {
-		return Math.floor(4 + air/5 + total/20);
-	};
-
-	var extra = function(attribute, total) {
-		return Math.floor(attribute/5 + total/10);
-	};
-
-	var health = function(blood, earth) {
-		return Math.floor(blood*3 + earth);
-	};
-
-	var add = function(value, maximum) {
-		return Math.min(value + 1, maximum);
-	};
-
-	var remove = function(value, minimum) {
-		return Math.max(value - 1, minimum);
-	};
-
-	var attribute = function(value, spent, deity) {
-		return value - spent + deity;
-	};
-
-	var attributes = (function() {
-		var elementTotal = function(attributes) {
-			return attributes[1] + attributes[2] + attributes[3] + attributes[4];
-		};
-
-		var total = function(attributes) {
-			return this.elementTotal(attributes) + attributes[0];
-		};
-
-		return {
-			elementTotal: elementTotal,
-			total: total
-		};
-	}());
-
-	return {
-		resistance: resistance,
-		offence: offence,
-		defence: defence,
-		speed: speed,
-		extra: extra,
-		health: health,
-		add: add,
-		remove: remove,
-		attribute: attribute,
-		attributes: attributes
 	};
 });
 

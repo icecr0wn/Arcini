@@ -2,30 +2,31 @@ var Arcini = (function() {
 	return {
 		Model: (function() {
 			return {
-				Character: function(characterName, baseAttributes, chosenDeity, constantsService, formulaService) {
+				Character: function(characterName, baseAttributes, chosenDeity, constantsService) {
 					var name = (!characterName ? '' : characterName);
 
 					if (!baseAttributes) {
 						baseAttributes = constants.Attributes.Base();
 					};
-					
+
 					var constants = constantsService;
-					var formula = formulaService;
-					
+
 					var attributes = (function() {
 						var base = (function() {
 							var values = baseAttributes;
 
 							var add = function(id) {
-								this.values[id] = formula.add(this.values[id], constants.Max.Attribute());
+								this.values[id] = Math.min(this.values[id] + 1, constants.Max.Attribute());
 							};
 
 							var remove = function(id) {
-								this.values[id] = formula.remove(this.values[id], attributes.spent.values[id]);
+								this.values[id] = Math.max(this.values[id] - 1, attributes.spent.values[id]);
 							};
 
 							var total = function() {
-								return formula.attributes.total(this.values);
+								return this.values.reduce(function(previous, current) {
+									return previous + current;
+								});
 							};
 
 							return {
@@ -40,15 +41,17 @@ var Arcini = (function() {
 							var values = constants.Attributes.Base();
 
 							var add = function(id) {
-								this.values[id] = formula.add(this.values[id], attributes.base.values[id] + deity.attribute(id));
+								this.values[id] = Math.min(this.values[id] + 1, attributes.base.values[id] + deity.attribute(id));
 							};
 
 							var remove = function(id) 	{
-								this.values[id] = formula.remove(this.values[id], constants.Min.Spent());
+								this.values[id] = Math.max(this.values[id] - 1, constants.Min.Spent());
 							};
 
 							var total = function() {
-								return formula.attributes.total(this.values);
+								return this.values.reduce(function(previous, current) {
+									return previous + current;
+								});
 							};
 
 							return {
@@ -60,27 +63,27 @@ var Arcini = (function() {
 						}());
 
 						var blood = function() {
-							return formula.attribute(this.base.values[0], this.spent.values[0], deity.attribute(0));
+							return this.base.values[0] - this.spent.values[0] + deity.attribute(0);
 						};
 
 						var air = function() {
-							return formula.attribute(this.base.values[1], this.spent.values[1], deity.attribute(1));
+							return this.base.values[1] - this.spent.values[1] + deity.attribute(1);
 						};
 
 						var earth = function() {
-							return formula.attribute(this.base.values[2], this.spent.values[2], deity.attribute(2));
+							return this.base.values[2] - this.spent.values[2] + deity.attribute(2);
 						};
 
 						var fire = function() {
-							return formula.attribute(this.base.values[3], this.spent.values[3], deity.attribute(3));
+							return this.base.values[3] - this.spent.values[3] + deity.attribute(3);
 						};
 
 						var water = function() {
-							return formula.attribute(this.base.values[4], this.spent.values[4], deity.attribute(4));
+							return this.base.values[4] - this.spent.values[4] + deity.attribute(4);
 						};
 
 						var total = function() {this
-							return formula.attribute(formula.attributes.total(this.base.values), formula.attributes.total(this.spent.values), formula.attributes.total(deity.attributes()));
+							return this.base.total() - this.spent.total() + deity.total();
 						};
 
 						return {
@@ -97,23 +100,23 @@ var Arcini = (function() {
 
 					var resistances = (function() {
 						var physical = function() {
-							return formula.resistance(attributes.blood(), attributes.total(), deity.resistance(0));
+							return Math.floor(attributes.blood()/5 + attributes.total()/20 + deity.resistance(0));
 						};
 
 						var air = function() {
-							return formula.resistance(attributes.air(), attributes.total(), deity.resistance(1));
-						};	
+							return Math.floor(attributes.air()/5 + attributes.total()/20 + deity.resistance(1));
+						};
 
 						var earth = function() {
-							return formula.resistance(attributes.earth(), attributes.total(), deity.resistance(2));
+							return Math.floor(attributes.earth()/5 + attributes.total()/20 + deity.resistance(2));
 						};
 
 						var fire = function() {
-							return formula.resistance(attributes.fire(), attributes.total(), deity.resistance(3));
+							return Math.floor(attributes.fire()/5 + attributes.total()/20 + deity.resistance(3));
 						};
 
 						var water = function() {
-							return formula.resistance(attributes.water(), attributes.total(), deity.resistance(4));
+							return Math.floor(attributes.water()/5 + attributes.total()/20 + deity.resistance(4));
 						};
 
 						return {
@@ -127,11 +130,11 @@ var Arcini = (function() {
 
 					var offence = (function() {
 						var physical = function() {
-							return formula.defence(attributes.blood(), [ attributes.earth(), attributes.fire() ], attributes.total());
+							return Math.floor(0.55 + (attributes.blood()/2 + attributes.earth() + attributes.fire())/5 + attributes.total()/20);
 						};
 
 						var elemental = function() {
-							return formula.defence(attributes.blood(), [ attributes.air(), attributes.fire() ], attributes.total());
+							return Math.floor(0.55 + (attributes.blood()/2 + attributes.air() + attributes.fire())/5 + attributes.total()/20);
 						};
 
 						return {
@@ -142,11 +145,11 @@ var Arcini = (function() {
 
 					var defence = (function() {
 						var physical = function() {
-							return formula.defence(attributes.blood(), [ attributes.earth(), attributes.water() ], attributes.total());
+							return Math.floor((attributes.blood()/2 + attributes.earth() + attributes.water())/5 + attributes.total()/20);
 						};
 
 						var elemental = function() {
-							return formula.defence(attributes.blood(), [ attributes.air(), attributes.water() ], attributes.total());
+							return Math.floor((attributes.blood()/2 + attributes.air() + attributes.water())/5 + attributes.total()/20);
 						};
 
 						return {
@@ -159,7 +162,7 @@ var Arcini = (function() {
 						var damage = 0;
 
 						var max = function() {
-							return formula.health(attributes.blood(), attributes.earth());
+							return Math.floor(attributes.blood()*3 + attributes.earth());
 						};
 
 						var current = function() {
@@ -167,11 +170,11 @@ var Arcini = (function() {
 						};
 
 						var dealDamage = function() {
-							this.damage = formula.add(this.damage, this.max());
+							this.damage = Math.min(this.damage + 1, this.max());
 						};
 
 						var heal = function() {
-							this.damage = formula.remove(this.damage, 0);
+							return Math.max(this.damage - 1, 0);
 						};
 
 						return {
@@ -184,16 +187,16 @@ var Arcini = (function() {
 					}());
 
 					var speed = function() {
-						return formula.speed(attributes.air(), attributes.total());
+						return Math.floor(4 + attributes.air()/5 + attributes.total()/20);
 					};
 
 					var extra = (function() {
 						var damage = function() {
-							return formula.extra(attributes.fire(), attributes.total());
+							return Math.floor(attributes.fire()/5 + attributes.total()/10);
 						};
 
 						var health = function() {
-							return formula.extra(attributes.water(), attributes.total());
+							return Math.floor(attributes.water()/5 + attributes.total()/10);
 						};
 
 						return {
@@ -205,19 +208,19 @@ var Arcini = (function() {
 					var deity = (function() {
 						var id = chosenDeity.id
 						var value = chosenDeity.value;
-						
+
 						var set = function(chosenDeity) {
 							value = chosenDeity.value;
 						};
-						
+
 						var index = function() {
 							return id;
 						};
-						
+
 						var attribute = function(index) {
 							return value.attributes[index];
 						};
-						
+
 						var attributes = function(index) {
 							return value.attributes;
 						};
@@ -226,15 +229,20 @@ var Arcini = (function() {
 							return value.resistances[index];
 						};
 						
+						var total = function() {
+							return 1;
+						};
+
 						return {
 							set: set,
 							index: index,
 							attribute: attribute,
 							attributes: attributes,
-							resistance: resistance
+							resistance: resistance,
+							total: total
 						};
 					}());
-					
+
 					return {
 						name: name,
 						attributes: attributes,
@@ -249,8 +257,8 @@ var Arcini = (function() {
 				},
 				Deity: function(deityName, baseAttributes, baseResistances) {
 					var name = (!deityName ? '' : deityName);
-					var attributes = (!baseAttributes ? constants.Attributes.Base() : baseAttributes);					
-					var resistances = (!baseAttributes ? constants.Attributes.Base() : baseResistances);					
+					var attributes = (!baseAttributes ? constants.Attributes.Base() : baseAttributes);
+					var resistances = (!baseAttributes ? constants.Attributes.Base() : baseResistances);
 
 					return {
 						name: name,
