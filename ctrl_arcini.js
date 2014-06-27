@@ -216,8 +216,6 @@ arcini.controller('Arcini.Controller.Creator', [ '$scope', 'Arcini.Service.Chara
 	$scope.list.characters = character.list();
 	$scope.list.deities = deity.list();
 	
-	character.add();
-	
 	$scope.constants = constants;
 
 	$scope.addCharacter = function() {
