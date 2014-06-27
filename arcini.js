@@ -15,22 +15,26 @@ var Arcini = (function() {
 						var base = (function() {
 							var values = baseAttributes;
 
+							var attribute = function(id) {
+								return values[id];
+							};
+
 							var add = function(id) {
-								this.values[id] = Math.min(this.values[id] + 1, constants.Max.Attribute());
+								values[id] = Math.min(values[id] + 1, constants.Max.Attribute());
 							};
 
 							var remove = function(id) {
-								this.values[id] = Math.max(this.values[id] - 1, attributes.spent.values[id]);
+								values[id] = Math.max(values[id] - 1, attributes.spent.attribute(id));
 							};
 
 							var total = function() {
-								return this.values.reduce(function(previous, current) {
+								return values.reduce(function(previous, current) {
 									return previous + current;
 								});
 							};
 
 							return {
-								values : values,
+								attribute: attribute,
 								add: add,
 								remove: remove,
 								total: total
@@ -40,22 +44,26 @@ var Arcini = (function() {
 						var spent = (function() {
 							var values = constants.Attributes.Base();
 
-							var add = function(id) {
-								this.values[id] = Math.min(this.values[id] + 1, attributes.base.values[id] + deity.attribute(id));
+							var attribute = function(id) {
+								return values[id];
 							};
 
-							var remove = function(id) 	{
-								this.values[id] = Math.max(this.values[id] - 1, constants.Min.Spent());
+							var add = function(id) {
+								values[id] = Math.min(values[id] + 1, attributes.base.attribute(id) + deity.attribute(id));
+							};
+
+							var remove = function(id) {
+								values[id] = Math.max(values[id] - 1, constants.Min.Spent());
 							};
 
 							var total = function() {
-								return this.values.reduce(function(previous, current) {
+								return values.reduce(function(previous, current) {
 									return previous + current;
 								});
 							};
 
 							return {
-								values: values,
+								attribute: attribute,
 								add: add,
 								remove: remove,
 								total: total
@@ -63,27 +71,27 @@ var Arcini = (function() {
 						}());
 
 						var blood = function() {
-							return this.base.values[0] - this.spent.values[0] + deity.attribute(0);
+							return base.attribute(0) - spent.attribute(0) + deity.attribute(0);
 						};
 
 						var air = function() {
-							return this.base.values[1] - this.spent.values[1] + deity.attribute(1);
+							return base.attribute(1) - spent.attribute(1) + deity.attribute(1);
 						};
 
 						var earth = function() {
-							return this.base.values[2] - this.spent.values[2] + deity.attribute(2);
+							return base.attribute(2) - spent.attribute(2) + deity.attribute(2);
 						};
 
 						var fire = function() {
-							return this.base.values[3] - this.spent.values[3] + deity.attribute(3);
+							return base.attribute(3) - spent.attribute(3) + deity.attribute(3);
 						};
 
 						var water = function() {
-							return this.base.values[4] - this.spent.values[4] + deity.attribute(4);
+							return base.attribute(4) - spent.attribute(4) + deity.attribute(4);
 						};
 
 						var total = function() {this
-							return this.base.total() - this.spent.total() + deity.total();
+							return base.total() - spent.total() + deity.total();
 						};
 
 						return {
@@ -228,7 +236,7 @@ var Arcini = (function() {
 						var resistance = function(index) {
 							return value.resistances[index];
 						};
-						
+
 						var total = function() {
 							return 1;
 						};
