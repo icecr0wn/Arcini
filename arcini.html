@@ -76,7 +76,7 @@
 								<td class='button_subtract'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(0)' value='-'>
 									</td>
-								<td class='value'>{{service.character.get($index).attributes.spent.values[0]}}</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(0)}}</td>
 								<td class='button_add'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(0)' value='+'>
 								</td>
@@ -95,7 +95,7 @@
 								<td class='button_subtract'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(1)' value='-'>
 									</td>
-								<td class='value'>{{service.character.get($index).attributes.spent.values[1]}}</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(1)}}</td>
 								<td class='button_add'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(1)' value='+'>
 								</td>
@@ -114,7 +114,7 @@
 								<td class='button_subtract'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(2)' value='-'>
 									</td>
-								<td class='value'>{{service.character.get($index).attributes.spent.values[2]}}</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(2)}}</td>
 								<td class='button_add'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(2)' value='+'>
 								</td>
@@ -133,7 +133,7 @@
 								<td class='button_subtract'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(3)' value='-'>
 									</td>
-								<td class='value'>{{service.character.get($index).attributes.spent.values[3]}}</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(3)}}</td>
 								<td class='button_add'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(3)' value='+'>
 								</td>
@@ -152,7 +152,7 @@
 								<td class='button_subtract'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(4)' value='-'>
 									</td>
-								<td class='value'>{{service.character.get($index).attributes.spent.values[4]}}</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(4)}}</td>
 								<td class='button_add'>
 									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(3)' value='+'>
 								</td>
