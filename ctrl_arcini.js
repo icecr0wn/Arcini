@@ -23,10 +23,9 @@ arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', function(se
 }]);
 
 arcini.factory('Arcini.Factory.Deity', [ function() {
-	var create = function(name, attributes, resistances) {
-		if (!name) {
-			name = '<choose>'
-		};
+	var create = function(name, title, attributes, resistances) {
+		name = (!name ? '' : name);
+		title = (!title ? '' : title);
 
 		if (!attributes) {
 			attributes = [ 0, 0, 0, 0, 0 ];
@@ -36,7 +35,7 @@ arcini.factory('Arcini.Factory.Deity', [ function() {
 			resistances = [ 0, 0, 0, 0, 0 ];
 		}
 
-		return new Arcini.Model.Deity(name, attributes, resistances);
+		return new Arcini.Model.Deity(name, title, attributes, resistances);
 	};
 
 	return {
@@ -72,16 +71,31 @@ arcini.service('Arcini.Service.Character', [ 'Arcini.Factory.Character', functio
 }]);
 
 arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factory) {
+	// @note Generated names for Deities come from: www.fantasynamegenerators.com/god-names.php
+	// All possibilities left:
+	/*
+		[ 3, 0, 0, 1, 2]
+		[ 3, 0, 0, 2, 1]
+		[ 3, 0, 1, 0, 2]
+		[ 3, 0, 1, 1, 1]
+		[ 3, 0, 1, 2, 0]
+		[ 3, 0, 2, 1, 0]
+		[ 3, 1, 0, 1, 1]
+		[ 3, 1, 1, 0, 1]
+		[ 3, 1, 2, 0, 0]
+		[ 3, 2, 0, 1, 0]
+		[ 3, 2, 1, 0, 0]
+		[ 3, 3, 0, 0, 0]
+	*/
 	var deities = [
-		{ id: 0, name: 'Almarea', value: factory.create('Almarea', 'Goddess of Wind', [ 3, 3, 0, 0, 0 ], [ 0, 2, 0, 0, 0 ]) },
-		{ id: 1, name: 'Baramaethor', value: factory.create('Baramaethor', 'God of Fire', [ 3, 0, 0, 3, 0 ], [ 0, 0, 0, 2, 0 ]) },
-		{ id: 2, name: 'Eferhilda', value: factory.create('Eferhilda', 'Goddess of Healing', [ 3, 0, 0, 0, 3 ], [ 0, 0, 0, 0, 2 ]) },
-		{ id: 3, name: 'Herion', value: factory.create('Herion', 'God of Seas', [ 3, 0, 1, 0, 2 ], [ 0, 0, 1, 0, 1 ]) },
-		{ id: 4, name: 'Jade', value: factory.create('Jade', 'Goddess of Flames', [ 3, 1, 0, 2, 0 ], [ 0, 1, 0, 1, 0 ]) },
-		{ id: 5, name: 'Khalon', value: factory.create('Khalon', 'God of Men', [ 3, 0, 3, 0, 0 ], [ 0, 0, 2, 0, 0 ]) },
-		{ id: 6, name: 'Lovisa', value: factory.create('Lovisa', 'Goddess of Ice', [ 3, 1, 0, 0, 2 ], [ 0, 1, 0, 0, 1 ]) },
-		{ id: 7, name: 'Naerdiel', value: factory.create('Naerdiel', 'Goddess of The Nether', [ 5, 1, 0, 0, 0 ], [ 2, 0, 0, 0, 0 ]) },
-		{ id: 8, name: 'Zebulon', value: factory.create('Zebulon', 'God of Battle', [ 3, 0, 2, 1, 0 ], [ 0, 0, 1, 1, 0 ]) }
+		{ id: 0, name: 'Homes', value: factory.create('Homes', 'God of Fire', [ 3, 0, 0, 3, 0 ], [ 1, 0, 0, 2, 0 ]) },
+		{ id: 1, name: 'Iion', value: factory.create('Iion', 'God of Summer', [ 3, 1, 1, 1, 0 ], [ 0, 1, 1, 1, 0 ]) },
+		{ id: 2, name: 'Isgyn', value: factory.create('Isgyn', 'Goddess of Magic', [ 3, 2, 0, 0, 1 ], [ 1, 1, 0, 0, 1 ]) },
+		{ id: 3, name: 'Jurheia', value: factory.create('Jurheia', 'Goddess of Rivers', [ 3, 0, 0, 0, 3 ], [ 1, 0, 0, 0, 2 ]) },
+		{ id: 4, name: 'Obhena', value: factory.create('Obhena', 'God of the Land', [ 3, 0, 2, 0, 1 ], [ 1, 0, 1, 0, 1 ]) },
+		{ id: 5, name: 'Ubris', value: factory.create('Ubris', 'God of Winter', [ 3, 1, 0, 0, 2 ], [ 1, 1, 0, 0, 1 ]) },
+		{ id: 6, name: 'Uqdea', value: factory.create('Uqdea', 'God of Day', [ 3, 1, 0, 2, 0 ], [ 1, 1, 0, 1, 0 ]) },
+		{ id: 7, name: 'Xevdione', value: factory.create('Xevdione', 'Goddess of Earth', [ 3, 0, 3, 0, 0 ], [ 1, 0, 2, 0, 0 ]) },
 	];
 
 	var get = function(index) {
@@ -89,7 +103,7 @@ arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factor
 	};
 	
 	var count = function() {
-		return 9; // @note The Arcini.Service.Deity.count() must be updated manually.
+		return 8; // @note The Arcini.Service.Deity.count() must be updated manually.
 	};
 
 	var list = function() {
