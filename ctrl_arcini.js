@@ -11,10 +11,10 @@ arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', function(se
 		};
 
 		if (!deity) {
-			deity = 0;
+			deity = Math.floor(Math.random() * (service.max() + 1));
 		}
 
-		return new Arcini.Model.Character(name, attributes, service.get(0));
+		return new Arcini.Model.Character(name, attributes, service.get(deity));
 	};
 
 	return {
@@ -72,24 +72,24 @@ arcini.service('Arcini.Service.Character', [ 'Arcini.Factory.Character', functio
 }]);
 
 arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factory) {
-/*
-Jade, Goddess of Fire and Air
-*/
 	var deities = [
-		{ id: 0, name: '<choose>', value: factory.create('<choose>', ' ', [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ]) },
-		{ id: 1, name: 'Almarea', value: factory.create('Almarea', 'Goddess of Wind', [ 3, 3, 0, 0, 0 ], [ 0, 2, 0, 0, 0 ]) },
-		{ id: 2, name: 'Baramaethor', value: factory.create('Baramaethor', 'God of Fire', [ 3, 0, 0, 3, 0 ], [ 0, 0, 0, 2, 0 ]) },
-		{ id: 3, name: 'Eferhilda', value: factory.create('Eferhilda', 'Goddess of Healing', [ 3, 0, 0, 0, 3 ], [ 0, 0, 0, 0, 2 ]) },
-		{ id: 4, name: 'Herion', value: factory.create('Herion', 'God of Seas', [ 3, 0, 1, 0, 2 ], [ 0, 0, 1, 0, 1 ]) },
-		{ id: 5, name: 'Jade', value: factory.create('Jade', 'Goddess of Flames', [ 3, 1, 0, 2, 0 ], [ 0, 1, 0, 1, 0 ]) },
-		{ id: 6, name: 'Khalon', value: factory.create('Khalon', 'God of Men', [ 3, 0, 3, 0, 0 ], [ 0, 0, 2, 0, 0 ]) },
-		{ id: 7, name: 'Lovisa', value: factory.create('Lovisa', 'Goddess of Ice', [ 3, 2, 0, 0, 1 ], [ 0, 1, 0, 0, 1 ]) },
-		{ id: 8, name: 'Naerdiel', value: factory.create('Naerdiel', 'Goddess of The Nether', [ 5, 1, 0, 0, 0 ], [ 2, 0, 0, 0, 0 ]) },
-		{ id: 9, name: 'Zebulon', value: factory.create('Zebulon', 'God of Battle', [ 3, 0, 2, 1, 0 ], [ 0, 0, 1, 1, 0 ]) }
+		{ id: 0, name: 'Almarea', value: factory.create('Almarea', 'Goddess of Wind', [ 3, 3, 0, 0, 0 ], [ 0, 2, 0, 0, 0 ]) },
+		{ id: 1, name: 'Baramaethor', value: factory.create('Baramaethor', 'God of Fire', [ 3, 0, 0, 3, 0 ], [ 0, 0, 0, 2, 0 ]) },
+		{ id: 2, name: 'Eferhilda', value: factory.create('Eferhilda', 'Goddess of Healing', [ 3, 0, 0, 0, 3 ], [ 0, 0, 0, 0, 2 ]) },
+		{ id: 3, name: 'Herion', value: factory.create('Herion', 'God of Seas', [ 3, 0, 1, 0, 2 ], [ 0, 0, 1, 0, 1 ]) },
+		{ id: 4, name: 'Jade', value: factory.create('Jade', 'Goddess of Flames', [ 3, 1, 0, 2, 0 ], [ 0, 1, 0, 1, 0 ]) },
+		{ id: 5, name: 'Khalon', value: factory.create('Khalon', 'God of Men', [ 3, 0, 3, 0, 0 ], [ 0, 0, 2, 0, 0 ]) },
+		{ id: 6, name: 'Lovisa', value: factory.create('Lovisa', 'Goddess of Ice', [ 3, 1, 0, 0, 2 ], [ 0, 1, 0, 0, 1 ]) },
+		{ id: 7, name: 'Naerdiel', value: factory.create('Naerdiel', 'Goddess of The Nether', [ 5, 1, 0, 0, 0 ], [ 2, 0, 0, 0, 0 ]) },
+		{ id: 8, name: 'Zebulon', value: factory.create('Zebulon', 'God of Battle', [ 3, 0, 2, 1, 0 ], [ 0, 0, 1, 1, 0 ]) }
 	];
 
 	var get = function(index) {
 		return deities[index];
+	};
+	
+	var max = function() {
+		return 9; // @note The Arcini.Service.Deity.max() must be updated manually.
 	};
 
 	var list = function() {
@@ -98,6 +98,7 @@ Jade, Goddess of Fire and Air
 
 	return {
 		get: get,
+		max: max,
 		list: list
 	};
 }]);
