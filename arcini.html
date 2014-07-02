@@ -36,20 +36,15 @@
 							<tr>
 								<td class='title'>Deity</td>
 								<td></td>
-								<td colspan='4'>
-									<select ng-model='selectedDeity' ng-options="deity as deity.name for deity in list.deities"
+								<td colspan='3'>
+									<select title='{{selectedDeity.value.title}}' ng-model='selectedDeity' ng-options="deity as deity.name for deity in list.deities"
 											ng-init='selectedDeity = list.deities[service.character.get($index).deity.index()]'
 											ng-change="service.character.get($index).deity.set(selectedDeity)">
 										{{selectedDeity}}
 									</select>
 								</td>
-								<td colspan='5'></td>
-							</tr>
-							<tr>
-								<td class='title'>Deity</td>
-								<td></td>
-								<td colspan='8'>
-									{{service.character.get($index).deity.deity().name()}}: {{service.character.get($index).deity.deity().title()}}
+								<td colspan='4'>
+									{{service.character.get($index).deity.deity().title()}}
 								</td>
 							</tr>
 							<tr>
