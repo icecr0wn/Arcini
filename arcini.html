@@ -205,9 +205,9 @@
 								<td class='button_subtract'>
 									<input type='submit' ng-click='service.character.get($index).health.heal()' value='-'>
 								</td>
-								<td class='value'>{{service.character.get($index).health.damage}}</td>
+								<td class='value'>{{service.character.get($index).health.damage()}}</td>
 								<td class='button_add'>
-									<input type='submit' ng-click='service.character.get($index).health.dealDamage()' value='+'>
+									<input type='submit' ng-click='service.character.get($index).health.harm()' value='+'>
 								</td>
 							</tr>
 							<tr>

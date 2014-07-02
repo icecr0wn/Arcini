@@ -167,29 +167,33 @@ var Arcini = (function() {
 					}());
 
 					var health = (function() {
-						var damage = 0;
+						var _damage = 0;
 
 						var max = function() {
 							return Math.floor(attributes.blood()*3 + attributes.earth());
 						};
 
 						var current = function() {
-							return this.max() - this.damage;
+							return max() - _damage;
+						};
+						
+						var damage = function() {
+							return _damage;
 						};
 
-						var dealDamage = function() {
-							this.damage = Math.min(this.damage + 1, this.max());
+						var harm = function() {
+							_damage = Math.min(_damage + 1, max());
 						};
 
 						var heal = function() {
-							return Math.max(this.damage - 1, 0);
+							_damage = Math.max(_damage - 1, 0);
 						};
 
 						return {
-							damage: damage,
 							max: max,
 							current: current,
-							dealDamage: dealDamage,
+							damage: damage,
+							harm: harm,
 							heal: heal
 						};
 					}());
