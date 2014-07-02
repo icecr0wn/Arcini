@@ -11,7 +11,7 @@ arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', function(se
 		};
 
 		if (!deity) {
-			deity = Math.floor(Math.random() * (service.max() + 1));
+			deity = Math.floor(Math.random() * (service.count() + 1));
 		}
 
 		return new Arcini.Model.Character(name, attributes, service.get(deity));
@@ -88,8 +88,8 @@ arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factor
 		return deities[index];
 	};
 	
-	var max = function() {
-		return 9; // @note The Arcini.Service.Deity.max() must be updated manually.
+	var count = function() {
+		return 9; // @note The Arcini.Service.Deity.count() must be updated manually.
 	};
 
 	var list = function() {
