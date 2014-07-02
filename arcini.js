@@ -251,13 +251,18 @@ var Arcini = (function() {
 						deity: deity
 					};
 				},
-				Deity: function(deityName, baseAttributes, baseResistances) {
+				Deity: function(deityName, deityTitle, attributes, resistances) {
 					var _name = (!deityName ? '' : deityName);
-					var _attributes = (!baseAttributes ? [ 0, 0, 0, 0, 0 ] : baseAttributes);
-					var _resistances = (!baseAttributes ? [ 0, 0, 0, 0, 0 ] : baseResistances);
+					var _title = (!deityTitle ? '' : deityTitle);
+					var _attributes = (!attributes ? [ 0, 0, 0, 0, 0 ] : attributes);
+					var _resistances = (!resistances ? [ 0, 0, 0, 0, 0 ] : resistances);
 					
 					var name = function() {
 						return _name;
+					};
+					
+					var title = function() {
+						return _title;
 					};
 					
 					var attribute = function(index) {
@@ -272,10 +277,11 @@ var Arcini = (function() {
 						return _attributes.reduce(function(previous, current) {
 							return previous + current;
 						});
-					}
+					};
 
 					return {
 						name: name,
+						title: title,
 						attribute: attribute,
 						resistance: resistance,
 						total: total

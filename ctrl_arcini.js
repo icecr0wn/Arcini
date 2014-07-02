@@ -72,17 +72,20 @@ arcini.service('Arcini.Service.Character', [ 'Arcini.Factory.Character', functio
 }]);
 
 arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factory) {
+/*
+Jade, Goddess of Fire and Air
+*/
 	var deities = [
-		{ id: 0, name: '<choose>', value: factory.create('<choose>', [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ]) },
-		{ id: 1, name: 'Almarea', value: factory.create('Almarea', [ 3, 3, 0, 0, 0 ], [ 0, 2, 0, 0, 0 ]) },
-		{ id: 2, name: 'Baramaethor', value: factory.create('Baramaethor', [ 3, 0, 0, 3, 0 ], [ 0, 0, 0, 2, 0 ]) },
-		{ id: 3, name: 'Eferhilda', value: factory.create('Eferhilda', [ 3, 0, 0, 0, 3 ], [ 0, 0, 0, 0, 2 ]) },
-		{ id: 4, name: 'Herion', value: factory.create('Herion', [ 3, 0, 2, 0, 1 ], [ 0, 0, 1, 0, 1 ]) },
-		{ id: 5, name: 'Jade', value: factory.create('Jade', [ 3, 1, 0, 2, 0 ], [ 0, 1, 0, 1, 0 ]) },
-		{ id: 6, name: 'Khalon', value: factory.create('Khalon', [ 3, 0, 3, 0, 0 ], [ 0, 0, 2, 0, 0 ]) },
-		{ id: 7, name: 'Lovisa', value: factory.create('Lovisa', [ 3, 2, 0, 0, 1 ], [ 0, 1, 0, 0, 1 ]) },
-		{ id: 8, name: 'Naerdiel', value: factory.create('Naerdiel', [ 5, 1, 0, 0, 0 ], [ 2, 0, 0, 0, 0 ]) },
-		{ id: 9, name: 'Zebulon', value: factory.create('Zebulon', [ 3, 0, 2, 1, 0 ], [ 0, 0, 1, 1, 0 ]) }
+		{ id: 0, name: '<choose>', value: factory.create('<choose>', ' ', [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ]) },
+		{ id: 1, name: 'Almarea', value: factory.create('Almarea', 'Goddess of Wind', [ 3, 3, 0, 0, 0 ], [ 0, 2, 0, 0, 0 ]) },
+		{ id: 2, name: 'Baramaethor', value: factory.create('Baramaethor', 'God of Fire', [ 3, 0, 0, 3, 0 ], [ 0, 0, 0, 2, 0 ]) },
+		{ id: 3, name: 'Eferhilda', value: factory.create('Eferhilda', 'Goddess of Healing', [ 3, 0, 0, 0, 3 ], [ 0, 0, 0, 0, 2 ]) },
+		{ id: 4, name: 'Herion', value: factory.create('Herion', 'God of Seas', [ 3, 0, 1, 0, 2 ], [ 0, 0, 1, 0, 1 ]) },
+		{ id: 5, name: 'Jade', value: factory.create('Jade', 'Goddess of Flames', [ 3, 1, 0, 2, 0 ], [ 0, 1, 0, 1, 0 ]) },
+		{ id: 6, name: 'Khalon', value: factory.create('Khalon', 'God of Men', [ 3, 0, 3, 0, 0 ], [ 0, 0, 2, 0, 0 ]) },
+		{ id: 7, name: 'Lovisa', value: factory.create('Lovisa', 'Goddess of Ice', [ 3, 2, 0, 0, 1 ], [ 0, 1, 0, 0, 1 ]) },
+		{ id: 8, name: 'Naerdiel', value: factory.create('Naerdiel', 'Goddess of The Nether', [ 5, 1, 0, 0, 0 ], [ 2, 0, 0, 0, 0 ]) },
+		{ id: 9, name: 'Zebulon', value: factory.create('Zebulon', 'God of Battle', [ 3, 0, 2, 1, 0 ], [ 0, 0, 1, 1, 0 ]) }
 	];
 
 	var get = function(index) {
