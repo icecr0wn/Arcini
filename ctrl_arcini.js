@@ -2,17 +2,9 @@ var arcini = angular.module('Arcini.Module.Arcini', []);
 
 arcini.factory('Arcini.Factory.Character', [ 'Arcini.Service.Deity', function(service) {
 	var create = function(name, attributes, deity) {
-		if (!name) {
-			name = '<choose name>'
-		};
-
-		if (!attributes) {
-			attributes = [ 0, 0, 0, 0, 0 ];
-		};
-
-		if (!deity) {
-			deity = Math.floor(Math.random() * (service.count() + 1));
-		}
+		name = (!name ? '<choose name>' : name);
+		attributes = (!attributes ? [ 0, 0, 0, 0, 0 ] : attributes);
+		deity = (!deity ? Math.floor(Math.random() * (service.count() + 1)): deity);
 
 		return new Arcini.Model.Character(name, attributes, service.get(deity));
 	};
@@ -26,14 +18,8 @@ arcini.factory('Arcini.Factory.Deity', [ function() {
 	var create = function(name, title, attributes, resistances) {
 		name = (!name ? '' : name);
 		title = (!title ? '' : title);
-
-		if (!attributes) {
-			attributes = [ 0, 0, 0, 0, 0 ];
-		};
-
-		if (!resistances) {
-			resistances = [ 0, 0, 0, 0, 0 ];
-		}
+		attributes = (!attributes ? [ 0, 0, 0, 0, 0 ] : attributes);
+		resistances = (!resistances ? [ 0, 0, 0, 0, 0 ] : resistances);
 
 		return new Arcini.Model.Deity(name, title, attributes, resistances);
 	};
@@ -49,7 +35,7 @@ arcini.factory('Arcini.Factory.Spell', [ function() {
 		title = (!type ? '' : type);
 		description = (!description? '' : description);
 		
-		return new Arcini.Model.Spell(name, type, description, /* damage, range, effect */);
+		return new Arcini.Model.Spell(name, type, description /*, damage, range, effect */);
 	};
 	
 	return {
