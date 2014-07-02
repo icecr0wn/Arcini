@@ -2,33 +2,31 @@ var Arcini = (function() {
 	return {
 		Model: (function() {
 			return {
-				Character: function(characterName, baseAttributes, chosenDeity, constantsService) {
+				Character: function(characterName, baseAttributes, chosenDeity) {
 					var name = (!characterName ? '' : characterName);
 
 					if (!baseAttributes) {
-						baseAttributes = constants.Attributes.Base();
+						baseAttributes = [ 0, 0, 0, 0, 0 ];
 					};
-
-					var constants = constantsService;
 
 					var attributes = (function() {
 						var base = (function() {
-							var values = baseAttributes;
+							var _values = baseAttributes;
 
 							var attribute = function(id) {
-								return values[id];
+								return _values[id];
 							};
 
 							var add = function(id) {
-								values[id] = Math.min(values[id] + 1, constants.Max.Attribute());
+								_values[id] = Math.min(_values[id] + 1, 30);
 							};
 
 							var remove = function(id) {
-								values[id] = Math.max(values[id] - 1, attributes.spent.attribute(id));
+								_values[id] = Math.max(_values[id] - 1, attributes.spent.attribute(id));
 							};
 
 							var total = function() {
-								return values.reduce(function(previous, current) {
+								return _values.reduce(function(previous, current) {
 									return previous + current;
 								});
 							};
@@ -42,22 +40,22 @@ var Arcini = (function() {
 						}());
 
 						var spent = (function() {
-							var values = constants.Attributes.Base();
+							var _values = [ 0, 0, 0, 0, 0 ];
 
 							var attribute = function(id) {
-								return values[id];
+								return _values[id];
 							};
 
 							var add = function(id) {
-								values[id] = Math.min(values[id] + 1, attributes.base.attribute(id) + deity.deity().attribute(id));
+								_values[id] = Math.min(_values[id] + 1, attributes.base.attribute(id) + deity.deity().attribute(id));
 							};
 
 							var remove = function(id) {
-								values[id] = Math.max(values[id] - 1, constants.Min.Spent());
+								_values[id] = Math.max(_values[id] - 1, 0);
 							};
 
 							var total = function() {
-								return values.reduce(function(previous, current) {
+								return _values.reduce(function(previous, current) {
 									return previous + current;
 								});
 							};
@@ -255,8 +253,8 @@ var Arcini = (function() {
 				},
 				Deity: function(deityName, baseAttributes, baseResistances) {
 					var _name = (!deityName ? '' : deityName);
-					var _attributes = (!baseAttributes ? constants.Attributes.Base() : baseAttributes);
-					var _resistances = (!baseAttributes ? constants.Attributes.Base() : baseResistances);
+					var _attributes = (!baseAttributes ? [ 0, 0, 0, 0, 0 ] : baseAttributes);
+					var _resistances = (!baseAttributes ? [ 0, 0, 0, 0, 0 ] : baseResistances);
 					
 					var name = function() {
 						return _name;
