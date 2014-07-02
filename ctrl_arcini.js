@@ -43,6 +43,20 @@ arcini.factory('Arcini.Factory.Deity', [ function() {
 	};
 }]);
 
+arcini.factory('Arcini.Factory.Spell', [ function() {
+	var create = function(name, type, description, damage, range, effect) {
+		name = (!name ? '' : name);
+		title = (!type ? '' : type);
+		description = (!description? '' : description);
+		
+		return new Arcini.Model.Spell(name, type, description, /* damage, range, effect */);
+	};
+	
+	return {
+		create: create
+	};
+}]);
+
 arcini.service('Arcini.Service.Character', [ 'Arcini.Factory.Character', function(factory) {
 	var characters = [];
 

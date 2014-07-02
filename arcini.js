@@ -174,7 +174,7 @@ var Arcini = (function() {
 						var current = function() {
 							return max() - _damage;
 						};
-						
+
 						var damage = function() {
 							return _damage;
 						};
@@ -227,7 +227,7 @@ var Arcini = (function() {
 						var index = function() {
 							return _id;
 						};
-						
+
 						var deity = function() {
 							return _deity;
 						}
@@ -256,23 +256,23 @@ var Arcini = (function() {
 					var _title = (!deityTitle ? '' : deityTitle);
 					var _attributes = (!attributes ? [ 0, 0, 0, 0, 0 ] : attributes);
 					var _resistances = (!resistances ? [ 0, 0, 0, 0, 0 ] : resistances);
-					
+
 					var name = function() {
 						return _name;
 					};
-					
+
 					var title = function() {
 						return _title;
 					};
-					
+
 					var attribute = function(index) {
 						return _attributes[index];
 					}
-					
+
 					var resistance = function(index) {
 						return _resistances[index];
 					}
-					
+
 					var total = function() {
 						return _attributes.reduce(function(previous, current) {
 							return previous + current;
@@ -287,6 +287,29 @@ var Arcini = (function() {
 						total: total
 					};
 				},
+				Spell: function(spellName, spellType, spellDescription, spellDamage /*not used*/, spellRange /*not used*/, spellEffect /*not used*/) {
+					var _name = (!spellName ? '' : spellName);
+					var _title = (!spellType ? '' : spellType);
+					var _description = (!spellDescription? '' : spellDescription);
+
+					var name = function() {
+						return _name;
+					};
+
+					var title = function() {
+						return _title;
+					};
+
+					var description = function() {
+						return _description;
+					};
+
+					return {
+						name: name,
+						title: title,
+						description: description
+					};
+				}
 			};
 		}()),
 	};
