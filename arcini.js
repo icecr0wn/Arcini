@@ -49,7 +49,7 @@ var Arcini = (function() {
 							};
 
 							var add = function(id) {
-								values[id] = Math.min(values[id] + 1, attributes.base.attribute(id) + deity.attribute(id));
+								values[id] = Math.min(values[id] + 1, attributes.base.attribute(id) + deity.deity().attribute(id));
 							};
 
 							var remove = function(id) {
@@ -71,27 +71,27 @@ var Arcini = (function() {
 						}());
 
 						var blood = function() {
-							return base.attribute(0) - spent.attribute(0) + deity.attribute(0);
+							return base.attribute(0) - spent.attribute(0) + deity.deity().attribute(0);
 						};
 
 						var air = function() {
-							return base.attribute(1) - spent.attribute(1) + deity.attribute(1);
+							return base.attribute(1) - spent.attribute(1) + deity.deity().attribute(1);
 						};
 
 						var earth = function() {
-							return base.attribute(2) - spent.attribute(2) + deity.attribute(2);
+							return base.attribute(2) - spent.attribute(2) + deity.deity().attribute(2);
 						};
 
 						var fire = function() {
-							return base.attribute(3) - spent.attribute(3) + deity.attribute(3);
+							return base.attribute(3) - spent.attribute(3) + deity.deity().attribute(3);
 						};
 
 						var water = function() {
-							return base.attribute(4) - spent.attribute(4) + deity.attribute(4);
+							return base.attribute(4) - spent.attribute(4) + deity.deity().attribute(4);
 						};
 
 						var total = function() {this
-							return base.total() - spent.total() + deity.total();
+							return base.total() - spent.total() + deity.deity().total();
 						};
 
 						return {
@@ -108,23 +108,23 @@ var Arcini = (function() {
 
 					var resistances = (function() {
 						var physical = function() {
-							return Math.floor(attributes.blood()/5 + attributes.total()/20 + deity.resistance(0));
+							return Math.floor(attributes.blood()/5 + attributes.total()/20 + deity.deity().resistance(0));
 						};
 
 						var air = function() {
-							return Math.floor(attributes.air()/5 + attributes.total()/20 + deity.resistance(1));
+							return Math.floor(attributes.air()/5 + attributes.total()/20 + deity.deity().resistance(1));
 						};
 
 						var earth = function() {
-							return Math.floor(attributes.earth()/5 + attributes.total()/20 + deity.resistance(2));
+							return Math.floor(attributes.earth()/5 + attributes.total()/20 + deity.deity().resistance(2));
 						};
 
 						var fire = function() {
-							return Math.floor(attributes.fire()/5 + attributes.total()/20 + deity.resistance(3));
+							return Math.floor(attributes.fire()/5 + attributes.total()/20 + deity.deity().resistance(3));
 						};
 
 						var water = function() {
-							return Math.floor(attributes.water()/5 + attributes.total()/20 + deity.resistance(4));
+							return Math.floor(attributes.water()/5 + attributes.total()/20 + deity.deity().resistance(4));
 						};
 
 						return {
@@ -214,40 +214,26 @@ var Arcini = (function() {
 					}());
 
 					var deity = (function() {
-						var id = chosenDeity.id
-						var value = chosenDeity.value;
+						var _id = chosenDeity.id
+						var _deity = chosenDeity.value;
 
 						var set = function(chosenDeity) {
-							value = chosenDeity.value;
+							_id = chosenDeity.id;
+							_deity = chosenDeity.value;
 						};
 
 						var index = function() {
-							return id;
+							return _id;
 						};
-
-						var attribute = function(index) {
-							return value.attributes[index];
-						};
-
-						var attributes = function(index) {
-							return value.attributes;
-						};
-
-						var resistance = function(index) {
-							return value.resistances[index];
-						};
-
-						var total = function() {
-							return 1;
-						};
+						
+						var deity = function() {
+							return _deity;
+						}
 
 						return {
 							set: set,
 							index: index,
-							attribute: attribute,
-							attributes: attributes,
-							resistance: resistance,
-							total: total
+							deity: deity
 						};
 					}());
 
@@ -264,14 +250,33 @@ var Arcini = (function() {
 					};
 				},
 				Deity: function(deityName, baseAttributes, baseResistances) {
-					var name = (!deityName ? '' : deityName);
-					var attributes = (!baseAttributes ? constants.Attributes.Base() : baseAttributes);
-					var resistances = (!baseAttributes ? constants.Attributes.Base() : baseResistances);
+					var _name = (!deityName ? '' : deityName);
+					var _attributes = (!baseAttributes ? constants.Attributes.Base() : baseAttributes);
+					var _resistances = (!baseAttributes ? constants.Attributes.Base() : baseResistances);
+					
+					var name = function() {
+						return _name;
+					};
+					
+					var attribute = function(index) {
+						return _attributes[index];
+					}
+					
+					var resistance = function(index) {
+						return _resistances[index];
+					}
+					
+					var total = function() {
+						return _attributes.reduce(function(previous, current) {
+							return previous + current;
+						});
+					}
 
 					return {
 						name: name,
-						attributes: attributes,
-						resistances: resistances
+						attribute: attribute,
+						resistance: resistance,
+						total: total
 					};
 				},
 			};
