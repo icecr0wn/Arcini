@@ -98,7 +98,7 @@ arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factor
 
 	return {
 		get: get,
-		max: max,
+		count: count,
 		list: list
 	};
 }]);
