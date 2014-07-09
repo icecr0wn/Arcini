@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"gorcini/server"
+	"gorcini/resource"
 )
 
 func sayHello() {
@@ -12,10 +13,13 @@ func sayHello() {
 
 func main() {
 	sayHello()
+	
+	rootRes := &resource.Resource{}
+	rootRes.New("/")
 
 	m := server.Server{}
 	m.New(3000)
-	m.Resource("^.*", nil)
+	m.Resource(rootRes)
 
 	finish := make(chan bool)
 	go m.Run(finish)

@@ -20,10 +20,11 @@ func (s *Server) New(port int) *Server {
 	return s
 }
 
-func (s *Server) Resource(path string, resource *resource.Resource) {
-	s.server.Get(path, func() string {
-		return fmt.Sprintf("Hello! You are now in %v!", path)
-	})
+func (s *Server) Resource(resource *resource.Resource) {
+	s.server.Get(resource.Path(), resource.Get)
+	s.server.Post(resource.Path(), resource.Post)
+	s.server.Put(resource.Path(), resource.Put)
+	s.server.Delete(resource.Path(), resource.Delete)
 }
 
 func (s *Server) Run(finish chan bool) {
