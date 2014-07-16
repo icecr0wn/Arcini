@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"gorcini/server"
 	"gorcini/resource"
+	"gorcini/server"
 )
 
 func sayHello() {
@@ -13,13 +13,17 @@ func sayHello() {
 
 func main() {
 	sayHello()
-	
+
 	rootRes := &resource.NotFoundResource{}
-	rootRes.New("/");
+	rootRes.New("/")
+
+	characterRes := &resource.CharacterResource{}
+	characterRes.New("/api/character/:name")
 
 	m := server.Server{}
 	m.New(3000)
 	m.Resource(rootRes)
+	m.Resource(characterRes)
 
 	finish := make(chan bool)
 	go m.Run(finish)
