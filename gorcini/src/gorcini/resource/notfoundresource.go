@@ -17,17 +17,17 @@ func (r *NotFoundResource) Path() string {
 }
 
 func (r *NotFoundResource) Get(parameters martini.Params) (int, string) {
-	return 404, "NOT FOUND"
+	return 404, "GET NOT FOUND"
 }
 
 func (r *NotFoundResource) Post(parameters martini.Params) (int, string) {
-	return 404, "POST"
+	return 404, "POST NOT FOUND"
 }
 
 func (r *NotFoundResource) Put(parameters martini.Params) (int, string) {
-	return 404, "PUT"
+	return 404, "PUT NOT FOUND"
 }
 
 func (r *NotFoundResource) Delete(parameters martini.Params) (int, string) {
-	return 404, "DELETE"
+	return 404, "DELETE NOT FOUND"
 }
