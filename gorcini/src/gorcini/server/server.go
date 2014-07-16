@@ -20,7 +20,8 @@ func (s *Server) New(port int) *Server {
 	return s
 }
 
-func (s *Server) Resource(resource *resource.Resource) {
+func (s *Server) Resource(resource resource.Resourcer) {
+	fmt.Printf("Adding resource for: %v\n", resource.Path())
 	s.server.Get(resource.Path(), resource.Get)
 	s.server.Post(resource.Path(), resource.Post)
 	s.server.Put(resource.Path(), resource.Put)

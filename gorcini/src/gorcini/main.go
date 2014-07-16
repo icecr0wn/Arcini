@@ -14,8 +14,8 @@ func sayHello() {
 func main() {
 	sayHello()
 	
-	rootRes := &resource.Resource{}
-	rootRes.New("/")
+	rootRes := &resource.NotFoundResource{}
+	rootRes.New("/");
 
 	m := server.Server{}
 	m.New(3000)
