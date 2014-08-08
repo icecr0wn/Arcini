@@ -10,3 +10,8 @@ install:
   - go get github.com/go-martini/martini
   - go get github.com/codegangsta/inject
 
+  
+script:
+  - go test -v common
+  - go test -v gorcini
+  - go install
