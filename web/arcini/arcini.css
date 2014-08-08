@@ -1,0 +1,75 @@
+a {
+	cursor: pointer;
+	font-weight: normal;
+	color: darkgreen;
+}
+a:hover {
+	font-weight: bold;
+
+}
+a.remove{
+	color: red;
+}
+
+body {
+	background-color: #FFFFDD;
+}
+
+input[type="text"] {
+	color: #61210B;
+	background-color: #F5F6CE;
+	display: block;
+	border: solid 1px #868A08;
+}
+input[type="text"].number {
+	text-align: right;
+}
+input[type="text"].span {
+	width: 100%;
+}
+input[type="text"]:focus {
+	background-color: #E1F5A9;
+	border: solid 1px #4B610B;
+}
+
+select {
+	width: 100%;
+}
+
+table {
+	border-collapse: collapse;
+	margin-right: 15px;
+}
+
+td.button_subtract {
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 10px;
+}
+td.button_add {
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+td.value {
+	background-color: #F5F6CE;
+	border: solid 1px #868A08;
+	text-align: right;	
+	width: 50px;
+}
+td.title {
+	font-weight: bold;
+}
+td.sub_title {
+	font-style: italic;
+	text-align: center;
+}
+td.sub {
+	font-style: italic;
+	width: 40px;
+	padding-right: 5px;
+}
+td.remove {
+	text-align: center;
+}

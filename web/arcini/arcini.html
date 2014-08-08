@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='./arcini.css' />
+		<meta charset='utf-8' />
+		<title>
+			Arcini Character Editor
+		</title>
+	</head>
+
+	<body>
+		<div ng-app='Arcini.Module.Arcini' ng-controller='Arcini.Controller.Creator'>
+			<table>
+				<tr>
+					<td ng-repeat='character in list.characters'>
+					</td>
+					<td>
+						<a ng-click='service.character.add()'>Add New</a>
+					</td>
+				</tr>
+				<tr>
+					<td ng-repeat='character in list.characters'>
+						<table>
+							<tr>
+								<td colspan='4'></td>
+								<td>&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td class='remove'><a class='remove' ng-click='service.character.remove($index)' >X</a></td>
+								<td></td>
+								<td colspan=4><b><input class='span' type='text' ng-model='service.character.get($index).name' /></b></td>
+							</tr>
+							<tr>
+								<td colspan='9'><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Deity</td>
+								<td></td>
+								<td colspan='3'>
+									<select title='{{selectedDeity.value.title}}' ng-model='selectedDeity' ng-options="deity as deity.name for deity in list.deities"
+											ng-init='selectedDeity = list.deities[service.character.get($index).deity.index()]'
+											ng-change="service.character.get($index).deity.set(selectedDeity)">
+										{{selectedDeity}}
+									</select>
+								</td>
+								<td colspan='4'>
+									{{service.character.get($index).deity.deity().title()}}
+								</td>
+							</tr>
+							<tr>
+								<td colspan='9'><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Stats</td>
+								<td></td>
+								<td class='sub_title'>Attr</td>
+								<td colspan='2'></td>
+								<td class='sub_title'>R</td>
+							</tr>
+							<tr>
+								<td class='sub'>Blood</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.remove(0)' value='-'>
+								</td>
+								<td class='value'>{{service.character.get($index).attributes.blood()}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.add(0)' value='+'>
+								</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).resistances.physical()}}</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(0)' value='-'>
+									</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(0)}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(0)' value='+'>
+								</td>
+							</tr>
+							<tr>
+								<td class='sub'>Air</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.remove(1)' value='-'>
+								</td>
+								<td class='value'>{{service.character.get($index).attributes.air()}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.add(1)' value='+'>
+								</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).resistances.air()}}</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(1)' value='-'>
+									</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(1)}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(1)' value='+'>
+								</td>
+							</tr>
+							<tr>
+								<td class='sub'>Earth</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.remove(2)' value='-'>
+								</td>
+								<td class='value'>{{service.character.get($index).attributes.earth()}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.add(2)' value='+'>
+								</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).resistances.earth()}}</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(2)' value='-'>
+									</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(2)}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(2)' value='+'>
+								</td>
+							</tr>
+							<tr>
+								<td class='sub'>Fire</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.remove(3)' value='-'>
+								</td>
+								<td class='value'>{{service.character.get($index).attributes.fire()}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.add(3)' value='+'>
+								</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).resistances.fire()}}</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(3)' value='-'>
+									</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(3)}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(3)' value='+'>
+								</td>
+							</tr>
+							<tr>
+								<td class='sub'>Water</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.remove(4)' value='-'>
+								</td>
+								<td class='value'>{{service.character.get($index).attributes.water()}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.base.add(4)' value='+'>
+								</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).resistances.water()}}</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.remove(4)' value='-'>
+									</td>
+								<td class='value'>{{service.character.get($index).attributes.spent.attribute(4)}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).attributes.spent.add(4)' value='+'>
+								</td>
+							</tr>
+							<tr>
+								<td colspan='9'><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Battle</td>
+								<td></td>
+								<td class='sub_title'>Off</td>
+								<td colspan='2'></td>
+								<td class='sub_title'>Def</td>
+							</tr>
+							<tr>
+								<td class='sub'>Physical</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).offence.physical()}}</td>
+								<td colspan='2'></td>
+								<td class='value'>{{service.character.get($index).defence.physical()}}</td>
+							</tr>
+							<tr>
+								<td class='sub'>Elemental</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).offence.elemental()}}</td>
+								<td colspan='2'></td>
+								<td class='value'>{{service.character.get($index).defence.elemental()}}</td>
+							</tr>
+							<tr>
+								<td><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Extra</td>
+							</tr>
+							<tr>
+								<td class='sub'>Damage</td>
+								<td colspan='4'></td>
+								<td class='value'>{{service.character.get($index).extra.damage()}}</td>
+							</tr>
+							<tr>
+								<td class='sub'>Health</td>
+								<td colspan='4'></td>
+								<td class='value'>{{service.character.get($index).extra.health()}}</td>
+							</tr>
+							<tr>
+								<td><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Health</td>
+								<td></td>
+								<td class='value'>{{service.character.get($index).health.current()}}</td>
+								<td colspan='2'></td>
+								<td class='value'>{{service.character.get($index).health.max()}}</td>
+							</tr>
+							<tr>
+								<td class='title'>Damage</td>
+								<td class='button_subtract'>
+									<input type='submit' ng-click='service.character.get($index).health.heal()' value='-'>
+								</td>
+								<td class='value'>{{service.character.get($index).health.damage()}}</td>
+								<td class='button_add'>
+									<input type='submit' ng-click='service.character.get($index).health.harm()' value='+'>
+								</td>
+							</tr>
+							<tr>
+								<td><br></td>
+							</tr>
+							<tr>
+								<td class='title'>Speed</td>
+								<td colspan='4'></td>
+								<td class='value'>{{service.character.get($index).speed()}}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.js'>
+		</script>
+		<script src='./arcini.js'>
+		</script>
+		<script src='./ctrl_arcini.js'>
+		</script>
+	</body>
+</html>
+
