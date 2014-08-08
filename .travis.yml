@@ -17,7 +17,7 @@ script:
 - go install -v gorcini
 - ./run_tests.sh
 - $GOPATH/bin/gover
-- sh -c 'echo gover.coverprofile'
+- sh -c 'cat gover.coverprofile'
 - $GOPATH/bin/goveralls -coverprofile=gover.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
