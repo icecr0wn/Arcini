@@ -12,10 +12,10 @@ install:
 
 script:
 - go install -v github.com/mattn/goveralls
-- go install -v github.com/modocache/gover
 - go install -v gorcini
-- ./run_tests.sh
-- $GOPATH/bin/goveralls -coverprofile=coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
+- sh -c rm -rf $GOPATH/src/github.com/
+- cd $GOPATH
+- $GOPATH/bin/goveralls -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
   global:
