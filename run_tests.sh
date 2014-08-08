@@ -2,7 +2,7 @@
 
 function runTest()
 {
-  go test -v -cover ${name}
+  go test -v -cover ${1}
 }
 
 runTest "common"
