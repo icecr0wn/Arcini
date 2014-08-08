@@ -13,8 +13,7 @@ install:
 script:
 - go install -v github.com/mattn/goveralls
 - go install -v gorcini
-- sh -c rm -rf $GOPATH/src/github.com/
-- cd $GOPATH
+- ./clean.sh
 - $GOPATH/bin/goveralls -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
