@@ -1,7 +1,7 @@
 language: go
 
 go:
-  1.0
+  tip
   
 before_install:
   - export GOPATH=`pwd`/go
