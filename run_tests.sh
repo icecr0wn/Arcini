@@ -1,6 +1,14 @@
 #!/bin/bash
 
-go test -v -cover common
+function runTest()
+{
+  go test -v -cover ${name}
+}
+
+runTest("common")
+runTest("common")
+runTest("common")
+runTest("common")
 go test -v -cover common/resource
 go test -v -cover common/server
 go test -v -cover gorcini
