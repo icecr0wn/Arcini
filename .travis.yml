@@ -8,7 +8,7 @@ before_install:
 
 install:
   - go get github.com/mattn/goveralls
-  - go -d -v ./...
+  - go get -d -v ./...
   
 
 script:
