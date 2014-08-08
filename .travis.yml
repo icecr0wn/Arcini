@@ -12,6 +12,5 @@ install:
 
   
 script:
-  - go test -v common
-  - go test -v gorcini
+  - go test -v ./...
   - go install
