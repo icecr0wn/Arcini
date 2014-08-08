@@ -7,13 +7,11 @@ before_install:
   - export GOPATH=`pwd`/go
 
 install:
-  - go get github.com/go-martini/martini
-  - go get code.google.com/p/go.tools/cmd/cover
   - go get github.com/mattn/goveralls
-  - go get -d -v ./...
+  - go -d -v ./...
+  
 
 script:
-  - go test -v ./...
-  - go test -v -covermode=count -coverprofile=coverage.out
+  - go test -v -covermode=count -coverprofile=coverage.out ./...
   - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
   - go install -v gorcini
