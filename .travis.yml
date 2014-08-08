@@ -12,6 +12,8 @@ install:
   
 
 script:
+  - go install -v mattn/goveralls
+  - go install -v gorcini
   - go test -v -covermode=count -coverprofile=coverage.out ./...
   - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
-  - go install -v gorcini
+  
