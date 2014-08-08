@@ -18,8 +18,7 @@ install:
 script:
 - go install -v github.com/mattn/goveralls
 - go install -v gorcini
-- for test in $TESTABLE_PKGS; do go -v -covermode=count -coverprofile=profile $test; cat profile >> coverage.out; done
-- go test -v ./... -covermode=count -coverprofile=coverage.out -coverpkgs=$TESTABLE_PKGS
+- for test in $TESTABLE_PKGS; do go test -v -covermode=count -coverprofile=profile $test; cat profile >> coverage.out; done
 - $GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
