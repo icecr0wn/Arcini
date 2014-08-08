@@ -13,8 +13,7 @@ install:
 
 script:
 - for pkg in $INSTALLABLE_PKGS; do go install -v $pkg; done
-- for test in $TESTABLE_PKGS; do $GOPATH/bin/gocov test -v -covermode=count -coverprofile=profile $test >> coverage.gocov; done
-- $GOPATH/bin/gocov report coverage.gocov > coverage.out
+- for test in $TESTABLE_PKGS; do $GOPATH/bin/gocov test -v -covermode=count $test >> coverage.out; done
 - $GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
