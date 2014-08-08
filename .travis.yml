@@ -14,7 +14,6 @@ install:
 script:
 - go install -v github.com/mattn/goveralls
 - go install -v gorcini
-- ./clean.sh
 - go test -v -covermode=count -coverprofile=coverageout ./...
 - $GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
