@@ -14,7 +14,8 @@ script:
 - go install -v github.com/mattn/goveralls
 - go install -v github.com/modocache/gover
 - go install -v gorcini
-- go test -v -cover ./...
+- go test -v -cover ./common/...
+- go test -v -cover ./gorcini/...
 - $GOPATH/bin/gover
 - $GOPATH/bin/goveralls -coverprofile=gover.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
 
