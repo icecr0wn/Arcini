@@ -5,7 +5,6 @@ go:
   
 before_install:
   - export GOPATH=`pwd`/go
-  - composer require satooshi/php-coveralls:~0.6@stable
 
 install:
   - go get github.com/go-martini/martini
