@@ -7,7 +7,6 @@ before_install:
 
 install:
 - go get github.com/mattn/goveralls
-- go get github.com/modocache/gover
 - go get code.google.com/p/go.tools/cmd/cover
 - go get -d -v ./...
 
@@ -16,8 +15,6 @@ script:
 - go install -v github.com/modocache/gover
 - go install -v gorcini
 - ./run_tests.sh
-- $GOPATH/bin/gover . coverprofile
-- sh -c 'cat coverprofile'
 - $GOPATH/bin/goveralls -coverprofile=coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
