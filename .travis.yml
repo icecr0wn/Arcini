@@ -8,9 +8,9 @@ before_install:
 
 install:
   - go get github.com/go-martini/martini
-  - go get github.com/codegangsta/inject
   - go get code.google.com/p/go.tools/cmd/cover
   - go get github.com/mattn/goveralls
+  - go get -d -v ./...
 
 script:
   - go test -v ./...
