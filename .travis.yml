@@ -10,6 +10,7 @@ install:
 - go get github.com/mattn/goveralls
 - go get code.google.com/p/go.tools/cmd/cover
 - go get github.com/axw/gocov/gocov
+- go get code.google.com/p/go.text/encoding
 - go get -d -v ./...
 
 script:
