@@ -4,17 +4,11 @@ go: 1.3
 
 before_install:
 - export GOPATH=`pwd`/go
-- export TESTABLE_PKGS="common/resource common/server gorcini gorcini/resource gorcini/model"
-- export INSTALLABLE_PKGS="gorcini github.com/axw/gocov/gocov github.com/mattn/goveralls code.google.com/p/go.tools/cmd/cover"
+- export PKGS="common/resource common/server gorcini gorcini/resource gorcini/model"
 
 install:
-- for pkg in $INSTALLABLE_PKGS; do go get -v $pkg; done
+- for pkg in $PKGS; do go get -v $pkg; done
 - go get -d -v ./...
 
 script:
-- for pkg in $INSTALLABLE_PKGS; do go install -v $pkg; done
-- for test in $TESTABLE_PKGS; do $GOPATH/bin/gocov test -v -covermode=count $test > coverage.out && cat coverage.out && $GOPATH/bin/gocov convert coverage.out > coverage.ok && $GOPATH/bin/goveralls -coverprofile=coverage.ok -service=travis-ci -repotoken $COVERALLS_TOKEN; done
-
-env:
-  global:
-    secure: WJrIzIVMah9gB4sehqZIPcsV1CDJoSHXIyBYB3MgaV1pAUsy85wTNHTEarlkmApOcODkh1IZ07jQw89EZ7+kUi3IGZ3zQH5wdtK7AgIDKYLnHX7zSA7AqgP+756a/6VtcK4ejJlaY0zYgqGiUGnjklc37r6UBaBy2O4TLL0HR4s=
+- for pkg in $PKGS; do go install -v $pkg; done
