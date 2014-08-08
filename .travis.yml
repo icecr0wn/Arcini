@@ -13,4 +13,4 @@ install:
   
 script:
   - go test -v ./...
-  - go install gorcini
+  - go install -v gorcini
