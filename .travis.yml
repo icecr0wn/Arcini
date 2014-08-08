@@ -6,12 +6,16 @@ go:
   
 before_install:
   - export GOPATH=`pwd`/go
+  - composer require satooshi/php-coveralls:~0.6@stable
 
 install:
   - go get github.com/go-martini/martini
   - go get github.com/codegangsta/inject
+  - go get code.google.com/p/go.tools/cmd/cover
+  - go get github.com/mattn/goveralls
 
-  
 script:
   - go test -v ./...
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
   - go install -v gorcini
