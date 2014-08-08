@@ -21,9 +21,6 @@ func Test_GetFormattedJson(t *testing.T) {
 		t.Error("Failed to parse 'type Dummy struct' to JSON.")
 	}
 
-	fmt.Printf(GetFormattedJson(data) + "\n")
-	fmt.Printf(expected + "\n")
-
 	if expected != GetFormattedJson(data) {
 		t.Error("Failed to retrieve correct formatted JSON.")
 	}
