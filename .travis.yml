@@ -7,18 +7,16 @@ before_install:
 - export TESTABLE_PKGS="common/resource common/server gorcini gorcini/resource gorcini/model"
 
 install:
-- go get github.com/go-martini/martini
-- go get github.com/codegangsta/inject
 - go get github.com/axw/gocov/gocov
 - go get github.com/mattn/goveralls
-- go get code.google.com/p/go.text/encoding
-- go get code.google.com/p/go-uuid/uuid
 - go get code.google.com/p/go.tools/cmd/cover
+- go get -d -v ./...
 
 script:
 - go install -v github.com/mattn/goveralls
 - go install -v gorcini
-- for test in $TESTABLE_PKGS; do go test -v -covermode=count -coverprofile=profile $test; cat profile >> coverage.out; done
+- for test in $TESTABLE_PKGS; do gocov test -v -covermode=count -coverprofile=profile $test >> coverage.gocov; done
+- gocov report coverage.gocov > coverage.out
 - $GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 env:
