@@ -3,7 +3,7 @@ language: go
 go:
   1.0
   
-before_install
+before_install:
   - export GOPATH=`pwd`/go
 
 install:
