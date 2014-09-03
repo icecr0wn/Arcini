@@ -74,9 +74,9 @@ arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factor
 	// @note Generated names for Deities come from: www.fantasynamegenerators.com/god-names.php
 	// All possibilities left:
 	/*
+		[ blood, air, earth, fire, water]
 		[ 3, 0, 0, 1, 2]
 		[ 3, 0, 0, 2, 1]
-		[ 3, 0, 1, 0, 2]
 		[ 3, 0, 1, 1, 1]
 		[ 3, 0, 1, 2, 0]
 		[ 3, 0, 2, 1, 0]
@@ -96,6 +96,7 @@ arcini.service('Arcini.Service.Deity', [ 'Arcini.Factory.Deity', function(factor
 		{ id: 5, name: 'Ubris', value: factory.create('Ubris', 'God of Winter', [ 3, 1, 0, 0, 2 ], [ 1, 1, 0, 0, 1 ]) },
 		{ id: 6, name: 'Uqdea', value: factory.create('Uqdea', 'God of Day', [ 3, 1, 0, 2, 0 ], [ 1, 1, 0, 1, 0 ]) },
 		{ id: 7, name: 'Xevdione', value: factory.create('Xevdione', 'Goddess of Earth', [ 3, 0, 3, 0, 0 ], [ 1, 0, 2, 0, 0 ]) },
+		{ id: 8, name: 'Yros', value: factory.create('Yros', 'God of Medicine', [ 3, 0, 1, 0, 2 ], [ 1, 0, 1, 0, 1 ]) },
 	];
 
 	var get = function(index) {
